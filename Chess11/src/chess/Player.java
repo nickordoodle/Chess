@@ -11,6 +11,12 @@ import pieces.Piece;
  */
 public class Player implements PlayerAbilities {
 
+	String name;
+	
+	public Player(String name){
+		this.name = name;
+	}
+
 	@Override
 	public boolean isValidMove(String move, String[][] board) {
 		// TODO Auto-generated method stub
