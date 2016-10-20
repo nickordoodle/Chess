@@ -24,4 +24,11 @@ public class Player implements PlayerAbilities {
 		return null;
 	}
 
+
+	@Override
+	public String toString(){
+		return null;
+		
+	}
+
 }

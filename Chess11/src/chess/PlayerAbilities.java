@@ -3,6 +3,8 @@
  */
 package chess;
 
+import pieces.Piece;
+
 /**
  * @author Nick
  * Used to set guideline of what a player
