@@ -3,6 +3,8 @@
  */
 package chess;
 
+import pieces.Piece;
+
 /**
  * @author Nick
  *
@@ -14,6 +16,7 @@ public class Player implements PlayerAbilities {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 
 	@Override
 	public String[][] movePiece(String move, Piece piece, String[][] board) {
