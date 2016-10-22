@@ -6,9 +6,9 @@ import view.Board;
 
 public class Chess {
 
-	static String playerOneName;
-	static String playerTwoName;
-	static Scanner input;
+	private static String playerOneName;
+	private static String playerTwoName;
+	private static Scanner input;
 	private static Board board;
 	Player playerOne;
 	Player playerTwo;
@@ -65,12 +65,14 @@ public class Chess {
 				count++;
 				continue;
 			}
-			else if(count % 2 == 0)
+			else if(count % 2 == 0){
 				System.out.println("Please enter your move player two["
 						+ playerTwo.name + "]");
-			else
-				System.out.println("Please enter your move player two["
+			} else{
+				System.out.println("Please enter your move player one["
 						+ playerOne.name + "]");
+			}
+				
 			
 			String move = input.next();
 			
