@@ -1,5 +1,5 @@
 package pieces;
 
-public class Piece {
+public abstract class Piece {
 
 }
