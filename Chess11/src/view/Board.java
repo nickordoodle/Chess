@@ -15,7 +15,7 @@ public class Board {
 	 * simple ASCII values
 	 */
 	
-	String[][] board;
+	Object[][] board;
 	final int width = 9;
 	final int height = 9;
 	
@@ -30,24 +30,51 @@ public class Board {
 	 * Used to initialize the board with all the 
 	 * starting pieces in the correct place
 	 */
-	private String[][] createBoard(){
+	private Object[][] createBoard(){
 
 		//length is 9 each to account for drawing
 		
-		String[][] newBoard = new String[width][height];
+		Object[][] newBoard = new String[width][height];
+		int ROWVAL = 8;
+		int COLVAL = 97;
 		
-	
-		/*need to iterate through array and populate accordingly
+		//last column are numbers from 8...1
+		//last row are lowercase letters from a..h
+		//need to iterate through array and populate accordingly
 		for(int i = 0; i < newBoard.length; i++){
-			
+				
+				
 			for (int a = 0; a < newBoard.length; a++){
-				//add values
+				
+				if(a == 8){
+					newBoard[i][a] = Character.toString((char) COLVAL);
+				}
+				else if(i == 8){
+					newBoard[i][a] = ROWVAL;
+					ROWVAL--;
+				}
+			
+					
 			}
 			
 		}
-		*/
+		
 		
 		return newBoard;
+	}
+	
+	
+	/*
+	 * Instance method to output the board to screen
+	 */
+	private void drawBoard(){
+		
+		for(int i = 0; i < board.length; i++){
+			
+			
+		}
+		
+		
 	}
 
 }
