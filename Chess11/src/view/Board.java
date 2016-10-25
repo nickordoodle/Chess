@@ -3,6 +3,14 @@
  */
 package view;
 
+import pieces.Bishop;
+import pieces.King;
+import pieces.Knight;
+import pieces.Pawn;
+import pieces.Piece;
+import pieces.Queen;
+import pieces.Rook;
+
 /**
  * @author Nick
  *
@@ -25,16 +33,30 @@ public class Board {
 		
 	}
 	
-	
+	private String[][] initBoard(String[][] board){
+		
+		for(int i = 0; i < board.length; i++){
+			
+			for(int a = 0; a < board.length; a++){
+				board[i][a] = "   ";
+			}
+		}
+		
+		return board;
+	}
 	/*
 	 * Used to initialize the board with all the 
 	 * starting pieces in the correct place
 	 */
-	private Object[][] createBoard(){
+	private String[][] createBoard(){
 
 		//length is 9 each to account for drawing
 		
-		Object[][] newBoard = new String[width][height];
+		String[][] newBoard = new String[width][height];
+		initBoard(newBoard);
+		final char[] initialRowSet = {'R', 'N', 'B', 'Q', 'K',
+				'B', 'N', 'R'};
+	
 		int ROWVAL = 8;
 		int COLVAL = 97;
 		
@@ -43,16 +65,67 @@ public class Board {
 		//need to iterate through array and populate accordingly
 		for(int i = 0; i < newBoard.length; i++){
 				
-				
 			for (int a = 0; a < newBoard.length; a++){
 				
-				if(a == 8){
-					newBoard[i][a] = Character.toString((char) COLVAL);
-				}
-				else if(i == 8){
-					newBoard[i][a] = ROWVAL;
+				//sets the column values designated by letters
+				if(a == 8 ){
+					newBoard[i][a] = Integer.toString(ROWVAL);
 					ROWVAL--;
 				}
+				//sets the row values going down on the right of board
+				else if(i == 8){
+					newBoard[i][a] = "  " + Character.toString((char) COLVAL) + "  ";
+					COLVAL++;
+				} 
+				//sets the top row and bottom row
+				else if(i == 0 || i == 7){
+					Piece newPiece = null;
+					char color;
+					
+					if(i == 0){
+						color = 'b';
+					}
+					else {
+						color = 'w';
+					}
+					
+					switch(initialRowSet[a]){
+						case 'R':
+							newPiece = new Rook(color, 'R');
+							break;
+						case 'N':
+							newPiece = new Knight(color, 'N');
+							break;
+						case 'B':
+							newPiece = new Bishop(color, 'B');
+							break;
+						case 'Q':
+							newPiece = new Queen(color, 'Q');
+							break;
+						case 'K':
+							newPiece = new King(color, 'K');
+							break;
+			
+					}
+					
+					if (newPiece == null){
+						throw new NullPointerException();
+					} else{
+						newBoard[i][a] = newPiece.toString();
+					}
+					
+				} else if (i == 1 || i == 6){
+					char color;
+					if(i == 1){
+						color = 'b';
+					} else {
+						color = 'w';
+					}
+					
+					Piece newPiece = new Pawn(color, 'p');
+					newBoard[i][a] = newPiece.toString();
+				}
+
 			
 					
 			}
@@ -67,11 +140,15 @@ public class Board {
 	/*
 	 * Instance method to output the board to screen
 	 */
-	private void drawBoard(){
+	public void drawBoard(){
 		
 		for(int i = 0; i < board.length; i++){
 			
+			for(int a = 0; a < board.length; a++){
+				System.out.print(board[i][a]);
+			}
 			
+			System.out.println();
 		}
 		
 		

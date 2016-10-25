@@ -40,6 +40,7 @@ public class Chess {
 		
 		board = new Board();
 		
+		
 		/*
 		 * Basic turn based game engine
 		 * 
@@ -56,7 +57,7 @@ public class Chess {
 		while(input.hasNext() && !gameOver){
 			
 			//Draw board at beginning of each turn
-			
+			board.drawBoard();
 			
 			/*Then pick move according to player turn, use odd/even numbers
 			* to indicate which player's turn it is.
