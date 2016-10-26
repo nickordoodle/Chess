@@ -23,7 +23,7 @@ public class Board {
 	 * simple ASCII values
 	 */
 	
-	Object[][] board;
+	String[][] board;
 	final int width = 9;
 	final int height = 9;
 	
@@ -38,7 +38,7 @@ public class Board {
 		for(int i = 0; i < board.length; i++){
 			
 			for(int a = 0; a < board.length; a++){
-				board[i][a] = "   ";
+				board[i][a] = "";
 			}
 		}
 		
@@ -57,8 +57,8 @@ public class Board {
 		final char[] initialRowSet = {'R', 'N', 'B', 'Q', 'K',
 				'B', 'N', 'R'};
 	
-		int ROWVAL = 8;
-		int COLVAL = 97;
+		int COLVAL = 8;
+		int ROWVAL = 97;
 		
 		//last column are numbers from 8...1
 		//last row are lowercase letters from a..h
@@ -69,13 +69,13 @@ public class Board {
 				
 				//sets the column values designated by letters
 				if(a == 8 ){
-					newBoard[i][a] = Integer.toString(ROWVAL);
-					ROWVAL--;
+					newBoard[i][a] = Integer.toString(COLVAL);
+					COLVAL--;
 				}
 				//sets the row values going down on the right of board
 				else if(i == 8){
-					newBoard[i][a] = "  " + Character.toString((char) COLVAL) + "  ";
-					COLVAL++;
+					newBoard[i][a] = Character.toString((char) ROWVAL) + " ";
+					ROWVAL++;
 				} 
 				//sets the top row and bottom row
 				else if(i == 0 || i == 7){
@@ -124,14 +124,22 @@ public class Board {
 					
 					Piece newPiece = new Pawn(color, 'p');
 					newBoard[i][a] = newPiece.toString();
+					
+					
+				} 
+
+				//even row and odd col
+				else if(i % 2 == 0 && a % 2 != 0 && newBoard[i][a].trim().length() == 0){
+					newBoard[i][a] = " ##";
+				} 
+				//odd row and odd col
+				else if (i % 2 != 0 && (a == 0 || a % 2 == 0 ) && newBoard[i][a].trim().length() == 0){
+					newBoard[i][a] = "##";
 				}
 
-			
-					
 			}
 			
 		}
-		
 		
 		return newBoard;
 	}
@@ -145,13 +153,13 @@ public class Board {
 		for(int i = 0; i < board.length; i++){
 			
 			for(int a = 0; a < board.length; a++){
-				System.out.print(board[i][a]);
+				String s = board[i][a];
+				System.out.printf("%4s", s);
 			}
 			
 			System.out.println();
 		}
-		
-		
 	}
+	
 
 }
