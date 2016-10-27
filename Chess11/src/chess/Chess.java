@@ -78,8 +78,6 @@ public class Chess {
 			String move = input.next();
 			
 			
-			
-			
 			count++;
 			
 		}
