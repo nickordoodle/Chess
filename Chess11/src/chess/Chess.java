@@ -19,10 +19,10 @@ public class Chess {
 		input = new Scanner(System.in);
 		
 		playerOneName = input.next();
-		System.out.println("Welcome Player " + playerOneName);
+		System.out.println("\nWelcome Player " + playerOneName);
 		System.out.println(enterNameMsg + "player two");
 		playerTwoName = input.next();
-		System.out.println("Welcome Player " + playerTwoName);
+		System.out.println("\nWelcome Player " + playerTwoName);
 
 		
 	}
