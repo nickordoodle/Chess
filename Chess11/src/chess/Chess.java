@@ -23,8 +23,6 @@ public class Chess {
 		System.out.println(enterNameMsg + "player two");
 		playerTwoName = input.next();
 		System.out.println("\nWelcome Player " + playerTwoName);
-  
-		
 	}
 	
 	public static void main(String[] args) {
