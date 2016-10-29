@@ -70,7 +70,7 @@ public class Board {
 				
 				//sets the column values designated by letters
 				if(a == 8 ){
-					newBoard[i][a] = Integer.toString(COLVAL);
+					newBoard[i][a] = Integer.toString(COLVAL) + " ";
 					COLVAL--;
 				}
 				//sets the row values going down on the right of board
@@ -131,11 +131,11 @@ public class Board {
 
 				//even row and odd col
 				else if(i % 2 == 0 && a % 2 != 0 && newBoard[i][a].trim().length() == 0){
-					newBoard[i][a] = " ##";
+					newBoard[i][a] = "## ";
 				} 
 				//odd row and odd col
 				else if (i % 2 != 0 && (a == 0 || a % 2 == 0 ) && newBoard[i][a].trim().length() == 0){
-					newBoard[i][a] = "##";
+					newBoard[i][a] = "## ";
 				}
 
 			}
@@ -151,11 +151,13 @@ public class Board {
 	 */
 	public void drawBoard(){
 		
+		System.out.println();
+		
 		for(int i = 0; i < board.length; i++){
 			
 			for(int a = 0; a < board.length; a++){
 				String s = board[i][a];
-				System.out.printf("%4s", s);
+				System.out.printf("%3s", s);
 			}
 			
 			System.out.println();
