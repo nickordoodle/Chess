@@ -50,7 +50,7 @@ public class Chess {
 		 * Game over is defined by a player winning, draw, or 
 		 * resign from a player
 		 */
-		
+	 	
 		System.out.println("Let the chess game begin!\n" + playerOne.name + " will "
 				+ "go first.");
 		
