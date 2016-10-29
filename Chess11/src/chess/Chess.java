@@ -15,15 +15,16 @@ public class Chess {
 	
 	private static void init(){
 		final String enterNameMsg = "Please enter your name ";
-		
 		System.out.println(enterNameMsg);
 		input = new Scanner(System.in);
 		
 		playerOneName = input.next();
-		System.out.println("\nWelcome Player " + playerOneName);
+		System.out.println("Welcome Player " + playerOneName);
 		System.out.println(enterNameMsg + "player two");
 		playerTwoName = input.next();
-		System.out.println("\nWelcome Player " + playerTwoName);
+		System.out.println("Welcome Player " + playerTwoName);
+
+		
 	}
 	
 	public static void main(String[] args) {
@@ -49,11 +50,11 @@ public class Chess {
 		 * Game over is defined by a player winning, draw, or 
 		 * resign from a player
 		 */
-	 	
-		System.out.println("Let the chess game begin!\n" + playerOne.name + " will "
-				+ "go first.");
 		
-		while(input.hasNextLine() && !gameOver){
+		System.out.println("Let the chess game begin! Player One will "
+				+ "go first. Please enter your move.");
+		
+		while(input.hasNext() && !gameOver){
 			
 			//Draw board at beginning of each turn
 			board.drawBoard();
@@ -61,17 +62,21 @@ public class Chess {
 			/*Then pick move according to player turn, use odd/even numbers
 			* to indicate which player's turn it is.
 			*/
+			if(count == 0){
+				count++;
+				continue;
+			}
+			else if(count % 2 == 0){
+				System.out.println("Please enter your move player two["
+						+ playerTwo.name + "]");
+			} else{
+				System.out.println("Please enter your move player one["
+						+ playerOne.name + "]");
+			}
+				
 			
-			// Ask for move
-			System.out.print("\n" + (count % 2 == 0 ? playerOne.name : playerTwo.name) 
-					+ "'s  move: ");
-
-			String move = input.nextLine();
+			String move = input.next();
 			
-			
-			/*
-			 *  Do Stuff Here
-			 */
 			
 			count++;
 			
