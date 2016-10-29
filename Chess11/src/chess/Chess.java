@@ -15,7 +15,7 @@ public class Chess {
 	
 	private static void init(){
 		final String enterNameMsg = "Please enter your name ";
-		String test = "Git Test";
+		
 		System.out.println(enterNameMsg);
 		input = new Scanner(System.in);
 		

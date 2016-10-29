@@ -11,6 +11,6 @@ public abstract class Piece {
 	}
 	
 	public String toString(){
-		return Character.toString(color) + Character.toString(type) + " ";
+		return " " + Character.toString(color) + Character.toString(type) + " ";
 	}
 }
