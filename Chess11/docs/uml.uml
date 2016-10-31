@@ -62,7 +62,7 @@
 			CodeGeneration
 		</plugin>
 </profile>
-<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Mon Oct 24 21:45:41 EDT 2016'>
+<XMI xmi.version = '1.2' xmlns:UML = 'org.omg.xmi.namespace.UML' timestamp = 'Sun Oct 30 21:02:23 EDT 2016'>
   <XMI.header>    <XMI.documentation>
       <XMI.exporter>ArgoUML (using Netbeans XMI Writer version 1.0)</XMI.exporter>
       <XMI.exporterVersion>0.34(6) revised on $Date: 2010-01-11 22:20:14 +0100 (Mon, 11 Jan 2010) $ </XMI.exporterVersion>
@@ -428,7 +428,7 @@
     ></text>
   </group>
   <group name="Fig2"
-       description="org.argouml.uml.diagram.static_structure.ui.FigPackage[512, 8, 544, 416]pathVisible=false;stereotypeView=0;stereotypeVisible=true;visibilityVisible=false"
+       description="org.argouml.uml.diagram.static_structure.ui.FigPackage[512, 8, 616, 432]pathVisible=false;stereotypeView=0;stereotypeVisible=true;visibilityVisible=false"
        href="-64--88-56-1-671b9ef1:157f368083a:-8000:0000000000000876"
        fill="1"
        fillcolor="white"
@@ -441,8 +441,8 @@
     <rectangle name="Fig2.0"
       x="512"
       y="8"
-      width="544"
-      height="416"
+      width="616"
+      height="432"
       fill="0"
       fillcolor="white"
       stroke="0"
@@ -457,23 +457,23 @@
     >
       <moveto x="512"
               y="8" />
-      <lineto x="1006"
+      <lineto x="1078"
               y="8" />
-      <lineto x="1006"
+      <lineto x="1078"
               y="32" />
-      <lineto x="1055"
+      <lineto x="1127"
               y="32" />
-      <lineto x="1055"
-              y="423" />
+      <lineto x="1127"
+              y="439" />
       <lineto x="512"
-              y="423" />
+              y="439" />
       <lineto x="512"
               y="8" />
     </path>
     <text name="Fig2.2"
       x="512"
       y="8"
-      width="495"
+      width="567"
       height="25"
       fill="0"
       fillcolor="white"
@@ -487,7 +487,7 @@
       justification="Left"
     >pieces</text>
     <group name="Fig2.3"
-         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[512, 8, 494, 1]"
+         description="org.argouml.uml.diagram.ui.FigStereotypesGroup[512, 8, 566, 1]"
          href="-64--88-56-1-671b9ef1:157f368083a:-8000:0000000000000876"
          fill="1"
          fillcolor="white"
@@ -501,7 +501,7 @@
       <rectangle name="Fig2.3.0"
         x="512"
         y="8"
-        width="494"
+        width="566"
         height="1"
         fill="1"
         fillcolor="white"
@@ -512,8 +512,8 @@
     <text name="Fig2.4"
       x="512"
       y="32"
-      width="544"
-      height="392"
+      width="616"
+      height="408"
       fill="0"
       fillcolor="white"
       stroke="1"

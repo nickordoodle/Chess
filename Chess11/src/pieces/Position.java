@@ -1,31 +1,35 @@
 package pieces;
 
 public class Position {
-
-
-	private String pieceToMove;
-	private String destination;
 	
-	public Position(String pieceToMove, String destination){
-		this.pieceToMove = pieceToMove;
-		this.destination = destination;
+	char column;
+	int row;
+	
+	public Position(char column, int row){
+		this.column = column;
+		this.row = row;
 	}
 	
-	public String getPieceToMove() {
-		return pieceToMove;
-	}
-
-	public void setPieceToMove(String pieceToMove) {
-		this.pieceToMove = pieceToMove;
-	}
-
-	public String getDestination() {
-		return destination;
-	}
-
-	public void setDestination(String destination) {
-		this.destination = destination;
-	}
-
 	
+	public void updatePosition(char col, int row){
+		setColumn(col);
+		setRow(row);
+	}
+	
+	public char getColumn() {
+		return column;
+	}
+
+	public void setColumn(char column) {
+		this.column = column;
+	}
+
+	public int getRow() {
+		return row;
+	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
 }
