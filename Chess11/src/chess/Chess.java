@@ -1,11 +1,17 @@
 package chess;
 
+import java.io.IOException;
 import java.util.Scanner;
+import java.util.logging.FileHandler;
+import java.util.logging.Logger;
+import java.util.logging.SimpleFormatter;
 
 import view.Board;
 
 public class Chess {
 
+	private static final Logger LOGGER = Logger.getLogger(Chess.class.getName());
+	private static FileHandler fh;
 	private static String playerOneName;
 	private static String playerTwoName;
 	private static Scanner input;
@@ -13,7 +19,25 @@ public class Chess {
 	Player playerOne;
 	Player playerTwo;
 	
+	private static void createLog() {
+
+		try {
+
+			// This block configure the logger with handler and formatter
+			fh = new FileHandler("C:/Users/Nick/workspace/chesslog.log");
+			LOGGER.addHandler(fh);
+			SimpleFormatter formatter = new SimpleFormatter();
+			fh.setFormatter(formatter);
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
 	private static void init(){
+
+		createLog();
 		final String enterNameMsg = "Please enter your name ";
 		System.out.println(enterNameMsg);
 		input = new Scanner(System.in);
@@ -29,11 +53,12 @@ public class Chess {
 	
 	private static boolean validateInput(char firstChar, char secondChar, int firstDigit, int secondDigit) {
 
-
 		// check if initial letters are valid
-		if (firstChar >= 97 && firstChar <= 104 && secondChar >= 97 && secondChar <= 104) {
-
-			if (firstDigit >= 0 && firstDigit <= 8 && secondDigit >= 1 && secondDigit <= 8) {
+		if (((int) firstChar) >= 97 && ((int) firstChar) <= 104 && ((int) secondChar) >= 97
+				&& ((int) secondChar) <= 104) {
+			LOGGER.info("first char as an int: " + (int) firstChar + " second char: " + (int) secondChar
+					+ " firstDigit: " + firstDigit + " second digit: " + secondDigit);
+			if (firstDigit >= 1 && firstDigit <= 8 && secondDigit >= 1 && secondDigit <= 8) {
 				return true;
 			}
 		}
@@ -114,7 +139,8 @@ public class Chess {
 				//Draw board 
 				board.drawBoard();
 			}
-			else if(count % 2 == 0){
+
+			if (count % 2 == 0) {
 				System.out.println("Please enter your move player two.  You are white pieces.["
 						+ playerTwo.name + "]");
 
@@ -127,15 +153,19 @@ public class Chess {
 				 * 97 - 97 + 8
 				 */
 
-				if (!validateInput(moveList[0].charAt(0), moveList[1].charAt(0), 
-						moveList[0].charAt(1), moveList[1].charAt(1))) {
+				LOGGER.info("Validating input...  " + moveList[0].charAt(0) + " " + moveList[1].charAt(0) + " "
+						+ moveList[0].charAt(1) + " " + moveList[1].charAt(1));
+
+				if (!validateInput(moveList[0].charAt(0), moveList[1].charAt(0),
+						Character.getNumericValue(moveList[0].charAt(1)),
+						Character.getNumericValue(moveList[1].charAt(1)))) {
 					System.out.println("Please enter valid input: [a-h][1-8] [a-h][1-8]\n");
 					continue;
 				}
 
 				int firstIndex = (int) (moveList[0].charAt(0)) - 97;
-				int secondIndex = (int) (Math.abs(moveList[0].charAt(1)) - 8);
-				 
+				int secondIndex = (int) (Math.abs((Character.getNumericValue(moveList[0].charAt(1))) - 8));
+				LOGGER.info("firstIndex: " + firstIndex + " secondIndex: " + secondIndex);
 				String selectedPiece = myBoard[firstIndex][secondIndex];
 				 
 				
