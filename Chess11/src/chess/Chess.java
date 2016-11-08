@@ -51,10 +51,10 @@ public class Chess {
 		 * resign from a player
 		 */
 		
-		System.out.println("Let the chess game begin!\n" + playerOne.name + " will "
-				+ "go first.\n");
+		System.out.println("Let the chess game begin! Player One will "
+				+ "go first. Please enter your move.");
 		
-		while(input.hasNextLine() && !gameOver){
+		while(input.hasNext() && !gameOver){
 			
 			//Draw board at beginning of each turn
 			board.drawBoard();
@@ -62,17 +62,21 @@ public class Chess {
 			/*Then pick move according to player turn, use odd/even numbers
 			* to indicate which player's turn it is.
 			*/
+			if(count == 0){
+				count++;
+				continue;
+			}
+			else if(count % 2 == 0){
+				System.out.println("Please enter your move player two["
+						+ playerTwo.name + "]");
+			} else{
+				System.out.println("Please enter your move player one["
+						+ playerOne.name + "]");
+			}
+				
 			
-			// Ask for move
-			System.out.print("\n" + (count % 2 == 0 ? playerOne.name : playerTwo.name) 
-					+ "'s  move: ");
-
-			String move = input.nextLine();
+			String move = input.next();
 			
-			
-			/*
-			 *  Do Stuff Here
-			 */
 			
 			count++;
 			
