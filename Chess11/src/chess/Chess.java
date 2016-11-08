@@ -31,6 +31,9 @@ public class Chess {
 
 		int count = 0;
 		boolean gameOver = false;
+		boolean drawRequest = false;
+		String moveString = "";
+		String[] moveList = null;
 
 		//start chess
 		init();
@@ -51,38 +54,61 @@ public class Chess {
 		 * resign from a player
 		 */
 		
-		System.out.println("Let the chess game begin! Player One will "
-				+ "go first. Please enter your move.");
+		System.out.println("Let the chess game begin!\n" + playerOne.name + " will "
+				+ "go first.\n");
 		
-		while(input.hasNext() && !gameOver){
+		// Initial Turn 
+		board.drawBoard();
+		System.out.print("Turn "+count+": \n" + (count % 2 == 0 ? playerOne.name : playerTwo.name) 
+				+ "'s  move: ");
+		moveString = input.nextLine();
+		
+		while(input.hasNextLine() && !gameOver){
 			
-			//Draw board at beginning of each turn
-			board.drawBoard();
+			// Get the move
+			moveString = input.nextLine();
+			moveList = moveString.split(" ");
 			
-			/*Then pick move according to player turn, use odd/even numbers
-			* to indicate which player's turn it is.
-			*/
-			if(count == 0){
-				count++;
-				continue;
+			// Check for Draw or Resigns
+			if(moveList != null && moveList.length > 2) {
+				if(moveList[2].equals("draw?")) {
+					drawRequest = true;
+					System.out.print("\n" + (count % 2 == 0 ? playerOne.name : playerTwo.name) 
+							+ " has initiated a draw request.\n");
+				}
+			} else {
+				if(moveList[0].equals("resign")) {
+					gameOver = true;
+					System.out.print("\n" + (count % 2 == 0 ? playerOne.name : playerTwo.name) 
+							+ " has resigned from the match.");
+					System.out.print("\n" + (count % 2 == 1 ? playerOne.name : playerTwo.name) 
+							+ " wins the match!");
+				} else if(moveList[0].equals("draw") && drawRequest) {
+					gameOver = true;
+					System.out.print("\n" + (count % 2 == 0 ? playerOne.name : playerTwo.name) 
+							+ " has accepted the draw request.");
+					System.out.print("\nThe match ends in a draw!");
+				}
+			 	drawRequest = false;				
 			}
-			else if(count % 2 == 0){
-				System.out.println("Please enter your move player two["
-						+ playerTwo.name + "]");
-			} else{
-				System.out.println("Please enter your move player one["
-						+ playerOne.name + "]");
-			}
+			
+			// Prepare Next Turn
+			
+			if(!gameOver) {
+				//Draw board 
+				board.drawBoard();
 				
-			
-			String move = input.next();
-			
-			
-			count++;
+				/*Then pick move according to player turn, use odd/even numbers
+				* to indicate which player's turn it is.
+				*/
+				count++;	
+				
+				// Ask for move
+				System.out.print("\n" + (count % 2 == 0 ? playerOne.name : playerTwo.name) 
+						+ "'s  move: ");
+			}			
 			
 		}
-		
-
 
 	}
 
