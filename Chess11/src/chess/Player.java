@@ -12,9 +12,11 @@ import pieces.Piece;
 public class Player implements PlayerAbilities {
 
 	String name;
+	char color;
 	
-	public Player(String name){
+	public Player(String name, char color) {
 		this.name = name;
+		this.color = color;
 	}
 
 	@Override

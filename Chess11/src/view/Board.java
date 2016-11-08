@@ -25,6 +25,7 @@ public class Board {
 	 */
 	
 	String[][] board;
+
 	final int width = 9;
 	final int height = 9;
 	
@@ -90,7 +91,7 @@ public class Board {
 						color = 'w';
 					}
 					
-					switch(initialRowSet[a]){
+					switch(initialRowSet[a]){	
 						case 'R':
 							newPiece = new Rook(color, 'R');
 							newPiece.position.updatePosition((char)COLVAL, ROWVAL);
@@ -168,5 +169,12 @@ public class Board {
 		}
 	}
 	
+	public String[][] getBoard() {
+		return board;
+	}
+
+	public void setBoard(String[][] board) {
+		this.board = board;
+	}
 
 }
