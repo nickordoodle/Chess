@@ -13,8 +13,6 @@ import pieces.Piece;
 public interface PlayerAbilities {
 	
 	
-	
-	boolean isValidMove(String move, String[][] board);
 	String[][] movePiece(String move, Piece piece, String[][] board);
 	String toString();
 	

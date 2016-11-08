@@ -17,4 +17,10 @@ public class Knight extends Piece {
 	public String toString(){
 		return super.toString();
 	}
+	
+	public boolean isValidMove(String move, String[][] board){
+		
+		return true;
+	}
+
 }

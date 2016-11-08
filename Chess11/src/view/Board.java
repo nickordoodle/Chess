@@ -93,18 +93,23 @@ public class Board {
 					switch(initialRowSet[a]){
 						case 'R':
 							newPiece = new Rook(color, 'R');
+							newPiece.position.updatePosition((char)COLVAL, ROWVAL);
 							break;
 						case 'N':
 							newPiece = new Knight(color, 'N');
+							newPiece.position.updatePosition((char)COLVAL, ROWVAL);
 							break;
 						case 'B':
 							newPiece = new Bishop(color, 'B');
+							newPiece.position.updatePosition((char)COLVAL, ROWVAL);
 							break;
 						case 'Q':
 							newPiece = new Queen(color, 'Q');
+							newPiece.position.updatePosition((char)COLVAL, ROWVAL);
 							break;
 						case 'K':
 							newPiece = new King(color, 'K');
+							newPiece.position.updatePosition((char)COLVAL, ROWVAL);
 							break;
 			
 					}
@@ -124,6 +129,7 @@ public class Board {
 					}
 					
 					Piece newPiece = new Pawn(color, 'p');
+					newPiece.position.updatePosition((char)COLVAL, ROWVAL);
 					newBoard[i][a] = newPiece.toString();
 					
 					
