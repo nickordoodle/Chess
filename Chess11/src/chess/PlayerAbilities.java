@@ -3,8 +3,6 @@
  */
 package chess;
 
-import pieces.Piece;
-
 /**
  * @author Nick
  * Used to set guideline of what a player
@@ -13,7 +11,7 @@ import pieces.Piece;
 public interface PlayerAbilities {
 	
 	
-	String[][] movePiece(String move, Piece piece, String[][] board);
+	String[][] movePiece(String src, String dest, String[][] board);
 	String toString();
 	
 

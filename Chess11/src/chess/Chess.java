@@ -16,6 +16,7 @@ public class Chess {
 	private static String playerTwoName;
 	private static Scanner input;
 	private static Board board;
+	public static boolean isBadMove = false;
 	Player playerOne;
 	Player playerTwo;
 	
@@ -59,7 +60,9 @@ public class Chess {
 			LOGGER.info("first char as an int: " + (int) firstChar + " second char: " + (int) secondChar
 					+ " firstDigit: " + firstDigit + " second digit: " + secondDigit);
 			if (firstDigit >= 1 && firstDigit <= 8 && secondDigit >= 1 && secondDigit <= 8) {
-				return true;
+				if (firstDigit != secondDigit && firstChar != secondChar) {
+					return true;
+				}
 			}
 		}
 
@@ -80,7 +83,7 @@ public class Chess {
 		Player playerOne = new Player(playerOneName, 'b');
 		Player playerTwo = new Player(playerTwoName, 'w');
 		
-		board = new Board();
+		board = new Board(playerOne, playerTwo);
 		String[][] myBoard = board.getBoard();
 		
 		
@@ -117,6 +120,7 @@ public class Chess {
 							+ " has initiated a draw request.\n");
 				}
 			} else {
+
 				if(moveList[0].equals("resign")) {
 					gameOver = true;
 					System.out.print("\n" + (count % 2 == 0 ? playerOne.name : playerTwo.name) 
@@ -129,6 +133,7 @@ public class Chess {
 							+ " has accepted the draw request.");
 					System.out.print("\nThe match ends in a draw!");
 				}
+
 			 	drawRequest = false;				
 
 			}
@@ -166,17 +171,47 @@ public class Chess {
 				int firstIndex = (int) (moveList[0].charAt(0)) - 97;
 				int secondIndex = (int) (Math.abs((Character.getNumericValue(moveList[0].charAt(1))) - 8));
 				LOGGER.info("firstIndex: " + firstIndex + " secondIndex: " + secondIndex);
+
+				// check if user chose correct colored piece
 				String selectedPiece = myBoard[firstIndex][secondIndex];
-				 
+				if (selectedPiece.charAt(0) != 'w') {
+					System.out.println("Please select your own pieces.\n");
+					continue;
+				}
+
 				
+				playerTwo.movePiece(moveList[0], moveList[1], myBoard);
+
+				while (isBadMove) {
+					continue;
+				}
+
+				isBadMove = false;
+
 			} else{
 				System.out.println("Please enter your move player one.  You are black pieces["
 						+ playerOne.name + "]");
 
+				playerOne.movePiece(moveList[0], moveList[1], myBoard);
+
+				while (isBadMove) {
+					continue;
+				}
+
+				isBadMove = false;
 				/*
+				 * int firstIndex = (int) (moveList[0].charAt(0)) - 97; int
+				 * secondIndex = (int)
+				 * (Math.abs((Character.getNumericValue(moveList[0].charAt(1)))
+				 * - 8)); LOGGER.info("firstIndex: " + firstIndex +
+				 * " secondIndex: " + secondIndex);
 				 * 
-				 * 
+				 * String selectedPiece = myBoard[firstIndex][secondIndex]; if
+				 * (selectedPiece.charAt(0) != 'b') {
+				 * System.out.println("Please select your own pieces.\n");
+				 * continue; }
 				 */
+					
 
 			}
 				
@@ -188,10 +223,10 @@ public class Chess {
 				// Ask for move
 				System.out.print("\n" + (count % 2 == 0 ? playerOne.name : playerTwo.name) 
 						+ "'s  move: ");
-			}			
+		}
 			
 			
-			count++;
+		count++;
 	
 	}
 

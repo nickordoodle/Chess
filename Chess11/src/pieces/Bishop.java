@@ -19,7 +19,7 @@ public class Bishop extends Piece {
 		return super.toString();
 	}
 	
-	public boolean isValidMove(String move, String[][] board){
+	public boolean isValidMove(String src, String dest, String[][] board) {
 		
 		return true;
 	}

@@ -16,6 +16,32 @@ public abstract class Piece {
 		return Character.toString(color) + Character.toString(type) + " ";
 	}
 	
-	public abstract boolean isValidMove(String move, String[][] board);
-	
+	// Implemented for each piece
+	public abstract boolean isValidMove(String src, String dest, String[][] board);
+
+
+	public char getColor() {
+		return color;
+	}
+
+	public void setColor(char color) {
+		this.color = color;
+	}
+
+	public char getType() {
+		return type;
+	}
+
+	public void setType(char type) {
+		this.type = type;
+	}
+
+	public Position getPosition() {
+		return position;
+	}
+
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+
 }

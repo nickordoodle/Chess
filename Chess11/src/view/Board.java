@@ -3,6 +3,7 @@
  */
 package view;
 
+import chess.Player;
 import pieces.Bishop;
 import pieces.King;
 import pieces.Knight;
@@ -29,9 +30,9 @@ public class Board {
 	final int width = 9;
 	final int height = 9;
 	
-	public Board(){
+	public Board(Player playerOne, Player playerTwo) {
 		
-		board = createBoard();
+		board = createBoard(playerOne, playerTwo);
 		
 	}
 	
@@ -50,7 +51,7 @@ public class Board {
 	 * Used to initialize the board with all the 
 	 * starting pieces in the correct place
 	 */
-	private String[][] createBoard(){
+	private String[][] createBoard(Player playerOne, Player playerTwo) {
 
 		//length is 9 each to account for drawing
 		
@@ -69,6 +70,8 @@ public class Board {
 				
 			for (int a = 0; a < newBoard.length; a++){
 				
+				boolean isPlayerOne = true;
+
 				//sets the column values designated by letters
 				if(a == 8 ){
 					newBoard[i][a] = Integer.toString(COLVAL) + " ";
@@ -89,6 +92,7 @@ public class Board {
 					}
 					else {
 						color = 'w';
+						isPlayerOne = false;
 					}
 					
 					switch(initialRowSet[a]){	
@@ -119,6 +123,14 @@ public class Board {
 						throw new NullPointerException();
 					} else{
 						newBoard[i][a] = newPiece.toString();
+
+						// add piece to respective player
+						if (isPlayerOne) {
+							playerOne.getPlayerPieces().add(newPiece);
+						} else {
+							playerTwo.getPlayerPieces().add(newPiece);
+						}
+
 					}
 					
 				} else if (i == 1 || i == 6){
@@ -127,12 +139,19 @@ public class Board {
 						color = 'b';
 					} else {
 						color = 'w';
+						isPlayerOne = false;
 					}
 					
 					Piece newPiece = new Pawn(color, 'p');
 					newPiece.position.updatePosition((char)COLVAL, ROWVAL);
 					newBoard[i][a] = newPiece.toString();
 					
+					// add piece to respective player
+					if (isPlayerOne) {
+						playerOne.getPlayerPieces().add(newPiece);
+					} else {
+						playerTwo.getPlayerPieces().add(newPiece);
+					}
 					
 				} 
 
