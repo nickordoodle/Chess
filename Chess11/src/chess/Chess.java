@@ -20,54 +20,6 @@ public class Chess {
 	Player playerOne;
 	Player playerTwo;
 	
-	private static void createLog() {
-
-		try {
-
-			// This block configure the logger with handler and formatter
-			fh = new FileHandler("C:/Users/Nick/workspace/chesslog.log");
-			LOGGER.addHandler(fh);
-			SimpleFormatter formatter = new SimpleFormatter();
-			fh.setFormatter(formatter);
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private static void init(){
-
-		createLog();
-		final String enterNameMsg = "Please enter your name ";
-		System.out.println(enterNameMsg);
-		input = new Scanner(System.in);
-		
-		playerOneName = input.next();
-		System.out.println("Welcome Player " + playerOneName);
-		System.out.println(enterNameMsg + "player two");
-		playerTwoName = input.next();
-		System.out.println("Welcome Player " + playerTwoName);
-
-		
-	}
-	
-	private static boolean validateInput(char firstChar, char secondChar, int firstDigit, int secondDigit) {
-
-		// check if initial letters are valid
-		if (((int) firstChar) >= 97 && ((int) firstChar) <= 104 && ((int) secondChar) >= 97
-				&& ((int) secondChar) <= 104) {
-			LOGGER.info("first char as an int: " + (int) firstChar + " second char: " + (int) secondChar
-					+ " firstDigit: " + firstDigit + " second digit: " + secondDigit);
-			if (firstDigit >= 1 && firstDigit <= 8 && secondDigit >= 1 && secondDigit <= 8) {
-				if (firstDigit != secondDigit && firstChar != secondChar) {
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
 
 	public static void main(String[] args) {
 
@@ -231,6 +183,53 @@ public class Chess {
 	}
 
 
+	private static void createLog() {
+
+		try {
+
+			// This block configure the logger with handler and formatter
+			fh = new FileHandler("C:/Users/Nick/workspace/chesslog.log");
+			LOGGER.addHandler(fh);
+			SimpleFormatter formatter = new SimpleFormatter();
+			fh.setFormatter(formatter);
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void init() {
+
+		createLog();
+		final String enterNameMsg = "Please enter your name ";
+		System.out.println(enterNameMsg);
+		input = new Scanner(System.in);
+
+		playerOneName = input.next();
+		System.out.println("Welcome Player " + playerOneName);
+		System.out.println(enterNameMsg + "player two");
+		playerTwoName = input.next();
+		System.out.println("Welcome Player " + playerTwoName);
+
+	}
+
+	private static boolean validateInput(char firstChar, char secondChar, int firstDigit, int secondDigit) {
+
+		// check if initial letters are valid
+		if (((int) firstChar) >= 97 && ((int) firstChar) <= 104 && ((int) secondChar) >= 97
+				&& ((int) secondChar) <= 104) {
+			LOGGER.info("first char as an int: " + (int) firstChar + " second char: " + (int) secondChar
+					+ " firstDigit: " + firstDigit + " second digit: " + secondDigit);
+			if (firstDigit >= 1 && firstDigit <= 8 && secondDigit >= 1 && secondDigit <= 8) {
+				if (firstDigit != secondDigit && firstChar != secondChar) {
+					return true;
+				}
+			}
+		}
+
+		return false;
+	}
 
 }
 
