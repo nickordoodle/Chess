@@ -3,6 +3,8 @@
  */
 package view;
 
+import java.util.logging.Logger;
+
 import chess.Player;
 import pieces.Bishop;
 import pieces.King;
@@ -24,7 +26,7 @@ public class Board {
 	 * to make it easier dealing with 
 	 * simple ASCII values
 	 */
-	
+	private static final Logger LOGGER = Logger.getLogger(Board.class.getName());
 	String[][] board;
 
 	final int width = 9;
@@ -60,8 +62,8 @@ public class Board {
 		final char[] initialRowSet = {'R', 'N', 'B', 'Q', 'K',
 				'B', 'N', 'R'};
 	
-		int COLVAL = 8;
-		int ROWVAL = 97;
+		char COLVAL = 'a';
+		int ROWVAL = 8;
 		
 		//last column are numbers from 8...1
 		//last row are lowercase letters from a..h
@@ -74,13 +76,13 @@ public class Board {
 
 				//sets the column values designated by letters
 				if(a == 8 ){
-					newBoard[i][a] = Integer.toString(COLVAL) + " ";
-					COLVAL--;
+					newBoard[i][a] = Integer.toString(ROWVAL) + " ";
+					ROWVAL--;
 				}
 				//sets the row values going down on the right of board
 				else if(i == 8){
-					newBoard[i][a] = Character.toString((char) ROWVAL) + " ";
-					ROWVAL++;
+					newBoard[i][a] = Character.toString(COLVAL) + " ";
+					COLVAL++;
 				} 
 				//sets the top row and bottom row
 				else if(i == 0 || i == 7){
@@ -98,23 +100,23 @@ public class Board {
 					switch(initialRowSet[a]){	
 						case 'R':
 							newPiece = new Rook(color, 'R');
-							newPiece.position.updatePosition((char)COLVAL, ROWVAL);
+						newPiece.position.updatePosition((char) (COLVAL + a), ROWVAL);
 							break;
 						case 'N':
 							newPiece = new Knight(color, 'N');
-							newPiece.position.updatePosition((char)COLVAL, ROWVAL);
+						newPiece.position.updatePosition((char) (COLVAL + a), ROWVAL);
 							break;
 						case 'B':
 							newPiece = new Bishop(color, 'B');
-							newPiece.position.updatePosition((char)COLVAL, ROWVAL);
+						newPiece.position.updatePosition((char) (COLVAL + a), ROWVAL);
 							break;
 						case 'Q':
 							newPiece = new Queen(color, 'Q');
-							newPiece.position.updatePosition((char)COLVAL, ROWVAL);
+						newPiece.position.updatePosition((char) (COLVAL + a), ROWVAL);
 							break;
 						case 'K':
 							newPiece = new King(color, 'K');
-							newPiece.position.updatePosition((char)COLVAL, ROWVAL);
+						newPiece.position.updatePosition((char) (COLVAL + a), ROWVAL);
 							break;
 			
 					}
@@ -143,7 +145,7 @@ public class Board {
 					}
 					
 					Piece newPiece = new Pawn(color, 'p');
-					newPiece.position.updatePosition((char)COLVAL, ROWVAL);
+					newPiece.position.updatePosition((char) (COLVAL + a), ROWVAL);
 					newBoard[i][a] = newPiece.toString();
 					
 					// add piece to respective player
@@ -152,6 +154,8 @@ public class Board {
 					} else {
 						playerTwo.getPlayerPieces().add(newPiece);
 					}
+					
+
 					
 				} 
 

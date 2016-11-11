@@ -4,6 +4,7 @@
 package chess;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 import pieces.Piece;
 
@@ -13,6 +14,7 @@ import pieces.Piece;
  */
 public class Player implements PlayerAbilities {
 
+	private static final Logger LOGGER = Logger.getLogger(Player.class.getName());
 	String name;
 	char color;
 	ArrayList<Piece> playerPieces;
@@ -21,6 +23,7 @@ public class Player implements PlayerAbilities {
 		this.name = name;
 		this.color = color;
 		this.playerPieces = new ArrayList<Piece>();
+		LOGGER.info("Creating a new player");
 
 	}
 
@@ -40,7 +43,6 @@ public class Player implements PlayerAbilities {
 	public String[][] movePiece(String src, String dest, String[][] board) {
 
 		Piece pieceToMove = null;
-
 		for (int i = 0; i < playerPieces.size(); i++) {
 
 			char col = playerPieces.get(i).getPosition().getColumn();
@@ -49,14 +51,23 @@ public class Player implements PlayerAbilities {
 			/*
 			 * find piece to move in players pieces
 			 */
-			if (Character.getNumericValue(col) == src.charAt(0) && row == Character.getNumericValue(src.charAt(1))) {
+			if (col == src.charAt(0)
+					&& row == Character.getNumericValue(src.charAt(1))) {
 				pieceToMove = playerPieces.get(i);
+				LOGGER.info("Selected piece to Move: " + pieceToMove.toString());
 
 				/* Selected piece is okay to move, update board and piece */
 				if (pieceToMove.isValidMove(src, dest, board)) {
 
-					board[Character.getNumericValue(dest.charAt(0))][Character
-							.getNumericValue(dest.charAt(1))] = pieceToMove.toString();
+					int srcRow = Math.abs(Character.getNumericValue(src.charAt(1)) - 8);
+					int srcCol = ((int) src.charAt(0)) - 97;
+					
+					int destRow = Math.abs(Character.getNumericValue(dest.charAt(1)) - 8);
+					int destCol = ((int) dest.charAt(0)) - 97;
+
+					board[destRow][destCol] = pieceToMove.toString();
+					board[srcRow][srcCol] = "";
+					LOGGER.info("Moved piece: " + pieceToMove.toString());
 					pieceToMove.getPosition().updatePosition(dest.charAt(0), Character.getNumericValue(dest.charAt(1)));
 
 				}

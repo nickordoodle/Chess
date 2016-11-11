@@ -3,6 +3,8 @@
  */
 package pieces;
 
+import java.util.logging.Logger;
+
 /**
  * @author Nick
  *
@@ -11,6 +13,7 @@ public class Pawn extends Piece {
 
 	private boolean isFirstMove;
 	private boolean isPromoted;
+	private static final Logger LOGGER = Logger.getLogger(Pawn.class.getName());
 
 	public Pawn(char color, char type) {
 		super(color, type);
@@ -37,10 +40,11 @@ public class Pawn extends Piece {
 		int moveLength = Math.abs(Character.getNumericValue(src.charAt(1)) 
 				- Character.getNumericValue(dest.charAt(1)));
 
-		int col = Character.getNumericValue(src.charAt(0));
-		int row = Character.getNumericValue(src.charAt(1));
-		
-		char playerColor = board[col][row].charAt(0);
+		int col = ((int) src.charAt(0)) - 97;
+		int row = Math.abs(Character.getNumericValue(src.charAt(1)) - 8);
+
+		String piece = board[row][col];
+		char playerColor = piece.charAt(0);
 		
 		// Move 2 spaces on first turn
 		if (moveLength > 1 && isFirstMove && (src.charAt(0) == dest.charAt(0))) {

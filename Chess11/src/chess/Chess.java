@@ -71,6 +71,7 @@ public class Chess {
 					System.out.print("\n" + (count % 2 == 0 ? playerOne.name : playerTwo.name) 
 							+ " has initiated a draw request.\n");
 				}
+
 			} else {
 
 				if(moveList[0].equals("resign")) {
@@ -101,15 +102,6 @@ public class Chess {
 				System.out.println("Please enter your move player two.  You are white pieces.["
 						+ playerTwo.name + "]");
 
-				/*
-				 * Check if piece is players piece Check if its on board
-				 * 
-				 * Get Piece, check if valid move for that piece
-				 * 
-				 * Get what first piece is, validate if it can go to the destination
-				 * 97 - 97 + 8
-				 */
-
 				LOGGER.info("Validating input...  " + moveList[0].charAt(0) + " " + moveList[1].charAt(0) + " "
 						+ moveList[0].charAt(1) + " " + moveList[1].charAt(1));
 
@@ -122,17 +114,20 @@ public class Chess {
 
 				int firstIndex = (int) (moveList[0].charAt(0)) - 97;
 				int secondIndex = (int) (Math.abs((Character.getNumericValue(moveList[0].charAt(1))) - 8));
-				LOGGER.info("firstIndex: " + firstIndex + " secondIndex: " + secondIndex);
 
 				// check if user chose correct colored piece
 				String selectedPiece = myBoard[firstIndex][secondIndex];
-				if (selectedPiece.charAt(0) != 'w') {
+				if (!selectedPiece.isEmpty() && selectedPiece.charAt(0) != 'w') {
 					System.out.println("Please select your own pieces.\n");
 					continue;
 				}
 
-				
-				playerTwo.movePiece(moveList[0], moveList[1], myBoard);
+				String[][] copy = playerTwo.movePiece(moveList[0], moveList[1], myBoard);
+				for (int i = 0; i < copy.length; i++) {
+					for (int a = 0; a < copy[i].length; a++) {
+						myBoard[i][a] = copy[i][a];
+					}
+				}
 
 				while (isBadMove) {
 					continue;
@@ -141,29 +136,22 @@ public class Chess {
 				isBadMove = false;
 
 			} else{
+
 				System.out.println("Please enter your move player one.  You are black pieces["
 						+ playerOne.name + "]");
 
-				playerOne.movePiece(moveList[0], moveList[1], myBoard);
+				String[][] copy = playerOne.movePiece(moveList[0], moveList[1], myBoard);
+				for (int i = 0; i < copy.length; i++) {
+					for (int a = 0; a < copy[i].length; a++) {
+						myBoard[i][a] = copy[i][a];
+					}
+				}
 
 				while (isBadMove) {
 					continue;
 				}
 
 				isBadMove = false;
-				/*
-				 * int firstIndex = (int) (moveList[0].charAt(0)) - 97; int
-				 * secondIndex = (int)
-				 * (Math.abs((Character.getNumericValue(moveList[0].charAt(1)))
-				 * - 8)); LOGGER.info("firstIndex: " + firstIndex +
-				 * " secondIndex: " + secondIndex);
-				 * 
-				 * String selectedPiece = myBoard[firstIndex][secondIndex]; if
-				 * (selectedPiece.charAt(0) != 'b') {
-				 * System.out.println("Please select your own pieces.\n");
-				 * continue; }
-				 */
-					
 
 			}
 				
@@ -178,7 +166,6 @@ public class Chess {
 		}
 			
 			
-		count++;
 	
 	}
 
@@ -219,10 +206,10 @@ public class Chess {
 		// check if initial letters are valid
 		if (((int) firstChar) >= 97 && ((int) firstChar) <= 104 && ((int) secondChar) >= 97
 				&& ((int) secondChar) <= 104) {
-			LOGGER.info("first char as an int: " + (int) firstChar + " second char: " + (int) secondChar
-					+ " firstDigit: " + firstDigit + " second digit: " + secondDigit);
 			if (firstDigit >= 1 && firstDigit <= 8 && secondDigit >= 1 && secondDigit <= 8) {
-				if (firstDigit != secondDigit && firstChar != secondChar) {
+				if (firstDigit == secondDigit && firstChar != secondChar) {
+					return true;
+				} else if (firstChar == secondChar && firstDigit != secondDigit) {
 					return true;
 				}
 			}
