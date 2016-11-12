@@ -78,7 +78,6 @@ public class Player implements PlayerAbilities {
 						char col2 = (char) playerPieces.get(j).getPosition().getRow();
 						int row2 = (int) playerPieces.get(j).getPosition().getColumn();
 						
-						System.out.println(pieceToMove.getType() + " " + pieceToMove.getColor() + " " + row2 + " " + col2);
 						if (pieceToMove.getType() == 'K' && pieceToMove.getColor() == 'w' && row2 == 1 && col2 == (char) 104) {
 							Piece piece = playerPieces.get(j);
 							board[7][5] = piece.toString();
@@ -106,13 +105,13 @@ public class Player implements PlayerAbilities {
 					
 					
 					// Remove opponent piece
-					for (int j = 0; j < opponent.playerPieces.size(); j++) {
+					for (int j = 0; j < opponent.getPlayerPieces().size(); j++) {
 						
-						char col2 = (char) opponent.playerPieces.get(j).getPosition().getRow();
-						int row2 = (int) opponent.playerPieces.get(j).getPosition().getColumn();
+						char col2 = (char) opponent.getPlayerPieces().get(j).getPosition().getRow();
+						int row2 = (int) opponent.getPlayerPieces().get(j).getPosition().getColumn();
 						
 						if (row2 == dstRow && col2 == (char) (dstCol + 97)) {
-							opponent.playerPieces.remove(j);	
+							opponent.getPlayerPieces().remove(j);	
 						}
 					}
 
@@ -128,6 +127,44 @@ public class Player implements PlayerAbilities {
 		}
 
 		return board;
+	}
+	
+	public boolean detectCheck(String[][] board, boolean player) {
+		// boolean player: true = white, false = black
+		
+		int kingRow = 0; int kingCol = 0;
+		
+		if(player) {
+			// find black King Location
+			for(int i=0; i < board.length; i++) {
+				for(int j=0; j < board[0].length; j++) {
+					if(board[i][j].trim().equals("bK")) {
+						kingRow = i;
+						kingCol = j;
+					}
+				}
+			}
+			
+		} else {
+			// find white King Location
+			for(int i=0; i < board.length; i++) {
+				for(int j=0; j < board[0].length; j++) {
+					if(board[i][j].trim().equals("wK")) {
+						kingRow = i;
+						kingCol = j;
+					}
+				}
+			}
+		}
+		
+		for(Piece piece : playerPieces) {
+			if(piece.isValidMove(piece.getPosition().getColumn(), piece.getPosition().getRow(), Math.abs(kingRow-8), kingCol + 97, board)) {
+				System.out.println("Check");
+				return true;
+			}
+		}
+		
+		return false;
 	}
 
 

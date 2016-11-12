@@ -140,6 +140,8 @@ public class Chess {
 						myBoard[i][a] = copy[i][a];
 					}
 				}
+				
+				playerOne.detectCheck(myBoard, true);
 
 				count++; board.drawBoard();
 				System.out.println("Please enter your move " + playerTwoName + ".  You are black.");
@@ -187,6 +189,8 @@ public class Chess {
 						myBoard[i][a] = copy[i][a];
 					}
 				}
+				
+				playerOne.detectCheck(myBoard, false);
 
 				count++; board.drawBoard();
 				System.out.println("Please enter your move " + playerOneName + ".  You are white.");
