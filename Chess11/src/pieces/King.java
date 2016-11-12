@@ -13,7 +13,7 @@ public class King extends Piece {
 	
 	public boolean isValidMove(int srcRow, int srcCol, int dstRow, int dstCol, String[][] board) {
 
-		int moveLength = dstRow - srcRow;
+		int moveLength = Math.abs(dstRow - srcRow);
 
 		srcRow = (int) (Math.abs(srcRow - 8));
 		srcCol = (int) (srcCol - 97);

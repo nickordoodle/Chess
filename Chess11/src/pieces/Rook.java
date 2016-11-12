@@ -11,72 +11,63 @@ public class Rook extends Piece {
 		return super.toString();
 	}
 	public boolean isValidMove(int srcRow, int srcCol, int dstRow, int dstCol, String[][] board) {
-		return false;
-	
-	/*	
-		// check the range between src and dest for no other pieces
+
+		srcRow = (int) (Math.abs(srcRow - 8));
+		srcCol = (int) (srcCol - 97);
+		dstRow = (int) (Math.abs(dstRow - 8));
+		dstCol = (int) (dstCol - 97);
 
 		// check for different numbers
-		if (src.charAt(0) == dest.charAt(0)) {
+		if (srcRow == dstRow) {
 
-			String temp = src;
-			int digit = Character.getNumericValue(temp.charAt(1));
-			int letter = Character.getNumericValue(temp.charAt(0));
-
-			while (!temp.equals(dest)) {
+			for(int i = srcCol; i < dstCol; i++) {
 
 				// check if other pieces are in the way
-				if (board[letter][digit] != "##" || !board[letter][digit].isEmpty()) {
+				if (!board[srcRow][i].trim().equals("") && !board[i][srcCol].trim().equals("##")) {
 					return false;
 				}
-
-				// increment digit or decrement digit based on direction
-				if (Character.getNumericValue(dest.charAt(1)) > digit) {
-					digit++;
-				} else {
-					digit--;
-				}
-
-				String newString = temp.substring(0, 0) + digit;
-				temp = newString.substring(0, newString.length());
-
+			}
+			
+			CharSequence colorToCheck;
+			if(color == 'b'){
+				colorToCheck = "w";
+			} else {
+				colorToCheck = "b";
+			}
+			
+			if (!board[dstRow][dstCol].contains(colorToCheck)) {
+				return false;
+			} else {
+				return true;
 			}
 
-			return true;
+		} else if (srcCol == dstCol) {
 
-		} else if (src.charAt(1) == dest.charAt(1)) {
-
-			// check for different letters
-			String temp = src;
-			int digit = Character.getNumericValue(temp.charAt(1));
-			int letter = Character.getNumericValue(temp.charAt(0));
-
-			while (!temp.equals(dest)) {
+			for(int i = srcRow; i < dstRow; i++) {
 
 				// check if other pieces are in the way
-				if (board[letter][digit] != "##" || !board[letter][digit].isEmpty()) {
+				if (!board[i][srcCol].trim().equals("") && !board[srcRow][i].trim().equals("##")) {
 					return false;
 				}
-
-				// increment or decrement letter
-				if (Character.getNumericValue(dest.charAt(0)) > letter) {
-					letter++;
-				} else {
-					letter--;
-				}
-
-				String newString = letter + temp.substring(1, 1);
-				temp = newString.substring(0, newString.length());
-
 			}
-
-			return true;
+			
+			CharSequence colorToCheck;
+			if(color == 'b'){
+				colorToCheck = "w";
+			} else {
+				colorToCheck = "b";
+			}
+			
+			if (!board[dstRow][dstCol].contains(colorToCheck)) {
+				return false;
+			} else {
+				return true;
+			}
 
 		} else {
 
 			return false;
 		}
-*/
 	}
 
 }
