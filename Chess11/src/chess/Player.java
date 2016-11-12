@@ -71,24 +71,48 @@ public class Player implements PlayerAbilities {
 						board[srcRow][srcCol] = "## ";
 					}
 					pieceToMove.getPosition().updatePosition(dstCol + 97, dstRow);
+					
+					// Castling rook
+					for (int j = 0; j < playerPieces.size(); j++) {
+						
+						char col2 = (char) playerPieces.get(j).getPosition().getRow();
+						int row2 = (int) playerPieces.get(j).getPosition().getColumn();
+						
+						System.out.println(pieceToMove.getType() + " " + pieceToMove.getColor() + " " + row2 + " " + col2);
+						if (pieceToMove.getType() == 'K' && pieceToMove.getColor() == 'w' && row2 == 1 && col2 == (char) 104) {
+							Piece piece = playerPieces.get(j);
+							board[7][5] = piece.toString();
+							board[7][7] = "";
+							piece.getPosition().updatePosition(7, 102);
+						}
+						
+						if (pieceToMove.getType() == 'K' && pieceToMove.getColor() == 'b' && row2 == 8 && col2 == (char) 104) {
+							Piece piece = playerPieces.get(j);
+							board[0][5] = piece.toString();
+							board[0][7] = "";
+							piece.getPosition().updatePosition(0, 102);
+						}
+					}
+					
+					// Promote pawn
 					if(pieceToMove.getType() == 'p') {
-						if(pieceToMove.getPosition().getRow() == 0 && pieceToMove.getColor() == 'w') {
+						if(dstRow == 0 && pieceToMove.getColor() == 'w') {
 							pieceToMove.setType(extra.charAt(0));
 						}
-						if(pieceToMove.getPosition().getRow() == 7 && pieceToMove.getColor() == 'b') {
+						if(dstRow == 7 && pieceToMove.getColor() == 'b') {
 							pieceToMove.setType(extra.charAt(0));
 						}
 					}
+					
+					
+					// Remove opponent piece
 					for (int j = 0; j < opponent.playerPieces.size(); j++) {
 						
 						char col2 = (char) opponent.playerPieces.get(j).getPosition().getRow();
 						int row2 = (int) opponent.playerPieces.get(j).getPosition().getColumn();
-						/*
-						 * find destination piece
-						 */
-						if (row2 == dstRow && col2 == (char) dstCol) {
+						
+						if (row2 == dstRow && col2 == (char) (dstCol + 97)) {
 							opponent.playerPieces.remove(j);	
-							break;
 						}
 					}
 

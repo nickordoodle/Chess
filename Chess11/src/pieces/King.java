@@ -27,15 +27,17 @@ public class King extends Piece {
 	 */
 	public boolean isValidMove(int srcRow, int srcCol, int dstRow, int dstCol, String[][] board) {
 
-		int moveLength = Math.abs(dstRow - srcRow);
+		int rowDist = Math.abs(dstRow - srcRow);
+		int colDist = Math.abs(dstCol - srcCol);
+		
 
 		srcRow = (int) (Math.abs(srcRow - 8));
 		srcCol = (int) (srcCol - 97);
 		dstRow = (int) (Math.abs(dstRow - 8));
 		dstCol = (int) (dstCol - 97);
-		
+		System.out.println(colDist);
 		// 1 step movement
-		if(moveLength == 1) {
+		if((rowDist == 1 && colDist == 0) || (rowDist == 0 && colDist == 1) || (rowDist == 1 && colDist == 1) ) {
 			
 			if (board[dstRow][dstCol].trim().equals("") || board[dstRow][dstCol].trim().equals("##")) {
 				return true;
@@ -56,11 +58,11 @@ public class King extends Piece {
 			
 		}
 		// castling movement
-		else if(moveLength == 2) {
+		else if(colDist == 2) {
 			if(color == 'w' && srcRow == 7 && srcCol == 4 && dstRow == 7 && dstCol == 6 && board[7][7].trim().equals("wR")) {
 				for (int i = srcCol + 1; i <= (srcCol + 2); i++) {
 					// check board spaces in between if they are empty
-					if (!board[i][srcCol].trim().equals("") && !board[i][srcCol].trim().equals("##")) {
+					if (!board[srcRow][i].trim().equals("") && !board[srcRow][i].trim().equals("##")) {
 						return false;
 					}
 				}
@@ -69,7 +71,7 @@ public class King extends Piece {
 			if(color == 'b' && srcRow == 0 && srcCol == 4 && dstRow == 0 && dstCol == 6 && board[0][0].trim().equals("bR")) {
 				for (int i = srcCol + 1; i <= (srcCol + 2); i++) {
 					// check board spaces in between if they are empty
-					if (!board[i][srcCol].trim().equals("") && !board[i][srcCol].trim().equals("##")) {
+					if (!board[srcRow][i].trim().equals("") && !board[srcRow][i].trim().equals("##")) {
 						return false;
 					}
 				}
