@@ -72,7 +72,6 @@ public class Pawn extends Piece {
 			if ((color == 'w' && dstRow > srcRow) || (color == 'b' && dstRow < srcRow) || (!board[rowToCheck][srcCol].trim().equals("") && !board[rowToCheck][srcCol].trim().equals("##"))) {
 				return false;
 			}
-			
 			return true;
 		} 
 		// Diagonal move to take opponent piece

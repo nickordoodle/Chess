@@ -4,7 +4,6 @@
 package chess;
 
 import java.util.ArrayList;
-import java.util.logging.Logger;
 
 import pieces.Piece;
 
@@ -44,7 +43,7 @@ public class Player implements PlayerAbilities {
 	 */
 
 	@Override
-	public String[][] movePiece(int srcRow, int srcCol, int dstRow, int dstCol, String[][] board) {
+	public String[][] movePiece(int srcRow, int srcCol, int dstRow, int dstCol, String extra, String[][] board) {
 		Piece pieceToMove = null;
 		for (int i = 0; i < playerPieces.size(); i++) {
 			
@@ -72,6 +71,14 @@ public class Player implements PlayerAbilities {
 						board[srcRow][srcCol] = "## ";
 					}
 					pieceToMove.getPosition().updatePosition(dstCol + 97, dstRow);
+					if(pieceToMove.getType() == 'p') {
+						if(pieceToMove.getPosition().getRow() == 0 && pieceToMove.getColor() == 'w') {
+							pieceToMove.setType(extra.charAt(0));
+						}
+						if(pieceToMove.getPosition().getRow() == 7 && pieceToMove.getColor() == 'b') {
+							pieceToMove.setType(extra.charAt(0));
+						}
+					}
 
 				}
 				/* The player did not select a valid move */

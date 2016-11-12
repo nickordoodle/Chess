@@ -1,10 +1,6 @@
 package chess;
 
-import java.io.IOException;
 import java.util.Scanner;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
 
 import view.Board;
 
@@ -14,8 +10,6 @@ import view.Board;
  */
 public class Chess {
 
-	private static final Logger LOGGER = Logger.getLogger(Chess.class.getName());
-	private static FileHandler fh;
 	private static String playerOneName;
 	private static String playerTwoName;
 	private static Scanner input;
@@ -69,27 +63,24 @@ public class Chess {
 			// Get the move
 			moveString = input.nextLine();
 			moveList = moveString.split(" ");
+			String extra = null;
 			
 			// Check for Draw or Resigns
 			if(moveList != null && moveList.length > 2) {
 				if(moveList[2].equals("draw?")) {
 					drawRequest = true;
-					System.out.print("\n" + (count % 2 == 0 ? playerOne.name : playerTwo.name) 
-							+ " has initiated a draw request.\n");
+				} else {
+					extra = moveList[2];
 				}
 
 			} else {
 
 				if(moveList[0].equals("resign")) {
 					gameOver = true;
-					System.out.print("\n" + (count % 2 == 0 ? playerOne.name : playerTwo.name) 
-							+ " has resigned from the match.");
 					System.out.print("\n" + (count % 2 == 1 ? "White" : "Black") 
 							+ " wins");
 				} else if(moveList[0].equals("draw") && drawRequest) {
 					gameOver = true;
-					System.out.print("\n" + (count % 2 == 0 ? playerOne.name : playerTwo.name) 
-							+ " has accepted the draw request.");
 					System.out.print("\nDraw");
 				}
 
@@ -134,7 +125,7 @@ public class Chess {
 					continue;
 				}
 
-				String[][] copy = playerOne.movePiece(srcRow, srcCol, dstRow, dstCol, myBoard);
+				String[][] copy = playerOne.movePiece(srcRow, srcCol, dstRow, dstCol, extra, myBoard);
 
 				if (isBadMove) {
 					isBadMove = false;
@@ -181,7 +172,7 @@ public class Chess {
 					continue;
 				}
 
-				String[][] copy = playerTwo.movePiece(srcRow, srcCol, dstRow, dstCol, myBoard);
+				String[][] copy = playerTwo.movePiece(srcRow, srcCol, dstRow, dstCol, extra, myBoard);
 
 				if (isBadMove) {
 					isBadMove = false;
