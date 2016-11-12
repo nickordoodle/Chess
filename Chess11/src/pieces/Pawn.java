@@ -35,8 +35,7 @@ public class Pawn extends Piece {
 
 	public boolean isValidMove(int srcRow, int srcCol, int dstRow, int dstCol, String[][] board) {
 		
-		int moveLength = dstRow - srcRow;
-		System.out.println("MOVELENGTH " + moveLength);
+		int moveLength = Math.abs(dstRow - srcRow);
 
 		srcRow = (int) (Math.abs(srcRow - 8));
 		srcCol = (int) (srcCol - 97);
@@ -51,7 +50,6 @@ public class Pawn extends Piece {
 			if(color == 'w') {
 				for (int i = srcRow - 1; i >= (srcRow - 2); i--) {
 					// check board spaces in between if they are empty
-					System.out.println(board[i][srcCol]);
 					if (!board[i][srcCol].trim().equals("") && !board[i][srcCol].trim().equals("##")) {
 						return false;
 					}
@@ -59,7 +57,6 @@ public class Pawn extends Piece {
 			} else {
 				for (int i = srcRow + 1; i >= (srcRow + 2); i++) {
 					// check board spaces in between if they are empty
-					System.out.println(board[i][srcCol]);
 					if (!board[i][srcCol].trim().equals("") && !board[i][srcCol].trim().equals("##")) {
 						return false;
 					}
@@ -71,22 +68,20 @@ public class Pawn extends Piece {
 		} 
 		// Normal one space forward move
 		else if (moveLength == 1 && srcCol == dstCol) {
-System.out.println("ONE FORWARD");
 			int rowToCheck;
 
 			if (color == 'w') {
-				rowToCheck = srcCol - 1;
+				rowToCheck = srcRow - 1;
 			} else {
-				rowToCheck = srcCol + 1;
+				rowToCheck = srcRow + 1;
 			}
 			// check space ahead if empty
-			System.out.println(board[rowToCheck][srcCol]);
 			if (!board[rowToCheck][srcCol].trim().equals("") && !board[rowToCheck][srcCol].trim().equals("##")) {
 				return false;
 			}
 			
 			return true;
-		}
+		} 
 		// Diagonal move to take opponent piece
 		else if (moveLength == 1 && srcCol != dstCol) {
 			
@@ -114,7 +109,7 @@ System.out.println("ONE FORWARD");
 
 		}
 		
-		return true;
+		return false;
 	}
 
 	public boolean isPromoted() {

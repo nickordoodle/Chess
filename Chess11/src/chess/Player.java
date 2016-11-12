@@ -42,12 +42,10 @@ public class Player implements PlayerAbilities {
 	@Override
 	public String[][] movePiece(int srcRow, int srcCol, int dstRow, int dstCol, String[][] board) {
 		Piece pieceToMove = null;
-		System.out.println((char) srcCol + ", " + srcRow);
 		for (int i = 0; i < playerPieces.size(); i++) {
 			
 			char col = (char) playerPieces.get(i).getPosition().getRow();
 			int row = (int) playerPieces.get(i).getPosition().getColumn();
-			System.out.println(col + ", " + row);
 			/*
 			 * find piece to move in players pieces
 			 */

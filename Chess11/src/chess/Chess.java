@@ -128,14 +128,15 @@ public class Chess {
 				}
 
 				String[][] copy = playerOne.movePiece(srcRow, srcCol, dstRow, dstCol, myBoard);
+
+				if (isBadMove) {
+					continue;
+				}
+				
 				for (int i = 0; i < copy.length; i++) {
 					for (int a = 0; a < copy[i].length; a++) {
 						myBoard[i][a] = copy[i][a];
 					}
-				}
-
-				while (isBadMove) {
-					continue;
 				}
 
 				isBadMove = false;
@@ -228,7 +229,7 @@ public class Chess {
 		System.out.println("Welcome Player " + playerTwoName);
 
 	}
-
+ 
 	private static boolean validateInput(char firstChar, char secondChar, int firstDigit, int secondDigit) {
 
 		// check if initial letters are valid
