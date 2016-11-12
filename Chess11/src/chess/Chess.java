@@ -41,8 +41,7 @@ public class Chess {
 		playerOne.setOpponent(playerTwo);
 		playerTwo.setOpponent(playerOne);
 		
-		boolean p1Check = false;
-		boolean p2Check = false;
+		boolean isCheckMate = false;
 		
 		board = new Board(playerOne, playerTwo);
 		String[][] myBoard = board.getBoard();
@@ -146,7 +145,12 @@ public class Chess {
 					}
 				}
 				
-				p1Check = playerOne.detectCheck(myBoard, true);
+				isCheckMate = playerOne.detectCheck(myBoard, true);
+				
+				if(isCheckMate) {
+					System.out.println("White wins");
+					break;
+				}
 
 				count++; board.drawBoard();
 				System.out.println("Please enter your move " + playerTwoName + ".  You are black.");
@@ -195,7 +199,12 @@ public class Chess {
 					}
 				}
 				
-				p2Check = playerOne.detectCheck(myBoard, false);
+				isCheckMate = playerTwo.detectCheck(myBoard, false);
+				
+				if(isCheckMate) {
+					System.out.println("Black wins");
+					break;
+				}
 
 				count++; board.drawBoard();
 				System.out.println("Please enter your move " + playerOneName + ".  You are white.");
