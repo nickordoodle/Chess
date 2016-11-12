@@ -1,14 +1,19 @@
-/**
- * 
- */
+
 package pieces;
 
+
 /**
- * @author Nick
+ * @author Nick and Kartik
  *
  */
 public class Knight extends Piece {
 
+	/**
+	 * Constructor for Knight
+	 * 
+	 * @param color
+	 * @param type
+	 */
 	public Knight(char color, char type) {
 		super(color, type);
 		// TODO Auto-generated constructor stub
@@ -17,7 +22,11 @@ public class Knight extends Piece {
 	public String toString(){
 		return super.toString();
 	}
-	
+
+
+	/* (non-Javadoc)
+	 * @see pieces.Piece#isValidMove()
+	 */
 	public boolean isValidMove(int srcRow, int srcCol, int dstRow, int dstCol, String[][] board) {
 
 		srcRow = (int) (Math.abs(srcRow - 8));

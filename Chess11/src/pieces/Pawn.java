@@ -1,19 +1,20 @@
-/**
- * 
- */
+
 package pieces;
 
-import java.util.logging.Logger;
-
 /**
- * @author Nick
+ * @author Nick and Kartik
  *
  */
 public class Pawn extends Piece {
 
 	private boolean isPromoted;
-	private static final Logger LOGGER = Logger.getLogger(Pawn.class.getName());
 
+	/**
+	 * Constructor for Pawn
+	 * 
+	 * @param color
+	 * @param type
+	 */
 	public Pawn(char color, char type) {
 		super(color, type);
 	}
@@ -21,18 +22,10 @@ public class Pawn extends Piece {
 	public String toString(){
 		return super.toString();
 	}
-	
-	// TODO: Must implement
-	/*
-	 * Cases: Check if column is the same and space is clear, if move is 2
-	 * spaces and both spaces are clear, check if first move,
-	 * 
-	 * else move must be one space diagonal and enemy must be in that space
-	 * 
-	 * 
-	 * TODO: IMPLEMENT THIS Special case: en passant capture
-	 */
 
+	/* (non-Javadoc)
+	 * @see pieces.Piece#isValidMove()
+	 */
 	public boolean isValidMove(int srcRow, int srcCol, int dstRow, int dstCol, String[][] board) {
 		
 		int moveLength = Math.abs(dstRow - srcRow);
@@ -99,7 +92,22 @@ public class Pawn extends Piece {
 					colorToCheck = "b";
 				}
 				
-				if (!board[dstRow][dstCol].contains(colorToCheck)) {
+				boolean enpassant = false;
+
+				if(color == 'w' && board[dstRow-1][dstCol].equals("bP")) {
+					if((dstRow - 1 + (dstCol-1)) % 2 == 0) {
+						board[dstRow-1][dstCol] = "## ";
+					}
+					enpassant = true;
+				}
+				if(color == 'b' && board[dstRow+1][dstCol].equals("wP")) {
+					if((dstRow + 1 + (dstCol-1)) % 2 == 0) {
+						board[dstRow+1][dstCol] = "## ";
+					}
+					enpassant = true;
+				}
+				
+				if (!board[dstRow][dstCol].contains(colorToCheck) && !enpassant) {
 					return false;
 				} else {
 					return true;

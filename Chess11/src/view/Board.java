@@ -1,9 +1,5 @@
-/**
- * 
- */
-package view;
 
-import java.util.logging.Logger;
+package view;
 
 import chess.Player;
 import pieces.Bishop;
@@ -14,30 +10,36 @@ import pieces.Piece;
 import pieces.Queen;
 import pieces.Rook;
 
+
 /**
- * @author Nick
+ * @author Nick and Kartik
  *
  */
 public class Board {
 
-	
-	/*
-	 * May want to change type of array 
-	 * to make it easier dealing with 
-	 * simple ASCII values
-	 */
-	private static final Logger LOGGER = Logger.getLogger(Board.class.getName());
 	String[][] board;
 
 	final int width = 9;
 	final int height = 9;
 	
+	/**
+	 * Constructor for Board
+	 * 
+	 * @param playerOne
+	 * @param playerTwo
+	 */
 	public Board(Player playerOne, Player playerTwo) {
 		
 		board = createBoard(playerOne, playerTwo);
 		
 	}
 	
+	/**
+	 * Initalizes the board with no pieces
+	 * 
+	 * @param board
+	 * @return String[][] of the board
+	 */
 	private String[][] initBoard(String[][] board){
 		
 		for(int i = 0; i < board.length; i++){
@@ -49,9 +51,13 @@ public class Board {
 		
 		return board;
 	}
-	/*
-	 * Used to initialize the board with all the 
-	 * starting pieces in the correct place
+
+
+	/**
+	 * Adds the initial pieces to the board
+	 * @param playerOne
+	 * @param playerTwo
+	 * @return String[][] of the board
 	 */
 	private String[][] createBoard(Player playerOne, Player playerTwo) {
 
@@ -176,8 +182,8 @@ public class Board {
 	}
 	
 	
-	/*
-	 * Instance method to output the board to screen
+	/**
+	 * Draw the Board in the ouput
 	 */
 	public void drawBoard(){
 		
@@ -196,6 +202,12 @@ public class Board {
 		return board;
 	}
 	
+	/**
+	 * Get a piece on the board
+	 * @param firstIndex
+	 * @param secondIndex
+	 * @return String of Piece on board
+	 */
 	public String getPiece(int firstIndex, int secondIndex) {
 		return board[firstIndex][secondIndex];
 	}

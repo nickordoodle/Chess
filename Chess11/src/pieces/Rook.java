@@ -1,12 +1,26 @@
 package pieces;
 
+/**
+ * @author Nick and Kartik
+ *
+ */
 public class Rook extends Piece {
 
+	/**
+	 * Constructor for Rook
+	 * 
+	 * @param color
+	 * @param type
+	 */
 	public Rook(char color, char type) {
 		super(color, type);
 		// TODO Auto-generated constructor stub
 	}
 
+
+	/* (non-Javadoc)
+	 * @see pieces.Piece#isValidMove()
+	 */
 	public String toString(){
 		return super.toString();
 	}

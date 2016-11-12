@@ -8,6 +8,10 @@ import java.util.logging.SimpleFormatter;
 
 import view.Board;
 
+/**
+ * @author Nick and Kartik
+ *
+ */
 public class Chess {
 
 	private static final Logger LOGGER = Logger.getLogger(Chess.class.getName());
@@ -20,7 +24,10 @@ public class Chess {
 	Player playerOne;
 	Player playerTwo;
 	
-
+	/**
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		int count = 0;
@@ -77,13 +84,13 @@ public class Chess {
 					gameOver = true;
 					System.out.print("\n" + (count % 2 == 0 ? playerOne.name : playerTwo.name) 
 							+ " has resigned from the match.");
-					System.out.print("\n" + (count % 2 == 1 ? playerOne.name : playerTwo.name) 
-							+ " wins the match!");
+					System.out.print("\n" + (count % 2 == 1 ? "White" : "Black") 
+							+ " wins");
 				} else if(moveList[0].equals("draw") && drawRequest) {
 					gameOver = true;
 					System.out.print("\n" + (count % 2 == 0 ? playerOne.name : playerTwo.name) 
 							+ " has accepted the draw request.");
-					System.out.print("\nThe match ends in a draw!");
+					System.out.print("\nDraw");
 				}
 
 			 	drawRequest = false;				
@@ -198,26 +205,12 @@ public class Chess {
 	
 	}
 
-
-	private static void createLog() {
-
-		try {
-
-			// This block configure the logger with handler and formatter
-			fh = new FileHandler("C:/Users/Kartik/workspace/chesslog.log");
-			LOGGER.addHandler(fh);
-			SimpleFormatter formatter = new SimpleFormatter();
-			fh.setFormatter(formatter);
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
+	/**
+	 * 
+	 * Initializes Chess Game
+	 */
 	private static void init() {
 
-		createLog();
 		final String enterNameMsg = "Please enter your name ";
 		System.out.println(enterNameMsg);
 		input = new Scanner(System.in);
@@ -229,7 +222,17 @@ public class Chess {
 		System.out.println("Welcome Player " + playerTwoName);
 
 	}
- 
+
+	/**
+	 * 
+	 * Checks if the input string is valid
+	 * 
+	 * @param firstChar
+	 * @param secondChar
+	 * @param firsDigit
+	 * @param secondDigit
+	 * @return boolean true if input is valid
+	 */
 	private static boolean validateInput(char firstChar, char secondChar, int firstDigit, int secondDigit) {
 
 		// check if initial letters are valid
@@ -237,12 +240,6 @@ public class Chess {
 				&& ((int) secondChar) <= 104) {
 			if (firstDigit >= 1 && firstDigit <= 8 && secondDigit >= 1 && secondDigit <= 8) {
 				return true;
-				
-				/* if (firstDigit == secondDigit && firstChar != secondChar) {
-					return true;
-				} else if (firstChar == secondChar && firstDigit != secondDigit) {
-					return true;
-				} */
 			}
 		}
 

@@ -1,7 +1,17 @@
 package pieces;
 
+/**
+ * @author Nick and Kartik
+ *
+ */
 public class Queen extends Piece {
 
+	/**
+	 * Constructor for Queen
+	 * 
+	 * @param color
+	 * @param type
+	 */
 	public Queen(char color, char type) {
 		super(color, type);
 		// TODO Auto-generated constructor stub
@@ -10,7 +20,11 @@ public class Queen extends Piece {
 	public String toString(){
 		return super.toString();
 	}
-	
+
+
+	/* (non-Javadoc)
+	 * @see pieces.Piece#isValidMove()
+	 */
 	public boolean isValidMove(int srcRow, int srcCol, int dstRow, int dstCol, String[][] board) {
 
 		srcRow = (int) (Math.abs(srcRow - 8));

@@ -1,16 +1,18 @@
-/**
- * 
- */
+
 package pieces;
 
 /**
- * @author Nick
+ * @author Nick and Kartik
  *
  */
 public class Bishop extends Piece {
 	
-	
-	
+	/**
+	 * Constructor for Bishop
+	 * 
+	 * @param color
+	 * @param type
+	 */
 	public Bishop(char color, char type) {
 		super(color, type);
 	}
@@ -18,7 +20,10 @@ public class Bishop extends Piece {
 	public String toString(){
 		return super.toString();
 	}
-	
+
+	/* (non-Javadoc)
+	 * @see pieces.Piece#isValidMove()
+	 */
 	public boolean isValidMove(int srcRow, int srcCol, int dstRow, int dstCol, String[][] board) {
 
 		srcRow = (int) (Math.abs(srcRow - 8));

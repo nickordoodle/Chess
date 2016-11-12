@@ -1,5 +1,9 @@
 package pieces;
 
+/**
+ * @author Nick and Kartik
+ *
+ */
 public abstract class Piece {
 	
 	protected char color;
@@ -7,6 +11,12 @@ public abstract class Piece {
 	public Position position;
 	public int isFirstMove = 2;
 	
+	/**
+	 * Constructor for Piece
+	 * 
+	 * @param color
+	 * @param type
+	 */
 	public Piece(char color, char type){
 		this.color = color;
 		this.type = type;
@@ -17,7 +27,16 @@ public abstract class Piece {
 		return Character.toString(color) + Character.toString(type) + " ";
 	}
 	
-	// Implemented for each piece
+	/**
+	 * Checks if the intended move is valid
+	 * 
+	 * @param srcRow
+	 * @param srcCol
+	 * @param dstRow
+	 * @param dstCol
+	 * @param board
+	 * @return boolean true if move is valid
+	 */
 	public abstract boolean isValidMove(int srcRow, int srcCol, int dstRow, int dstCol, String[][] board);
 
 
