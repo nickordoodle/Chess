@@ -5,7 +5,12 @@ package chess;
 
 import java.util.ArrayList;
 
+import pieces.Bishop;
+import pieces.King;
+import pieces.Knight;
 import pieces.Piece;
+import pieces.Queen;
+import pieces.Rook;
 
 /**
  * @author Nick and Kartik
@@ -95,11 +100,32 @@ public class Player implements PlayerAbilities {
 					
 					// Promote pawn
 					if(pieceToMove.getType() == 'p') {
-						if(dstRow == 0 && pieceToMove.getColor() == 'w') {
-							pieceToMove.setType(extra.charAt(0));
-						}
-						if(dstRow == 7 && pieceToMove.getColor() == 'b') {
-							pieceToMove.setType(extra.charAt(0));
+						if((dstRow == 8 && pieceToMove.getColor() == 'w') || (dstRow == 1 && pieceToMove.getColor() == 'b')) {
+							switch(extra.charAt(0)){	
+								case 'R':
+									pieceToMove = new Rook(pieceToMove.getColor(), 'R');
+									break;
+								case 'N':
+									pieceToMove = new Knight(pieceToMove.getColor(), 'N');
+									break;
+								case 'B':
+									pieceToMove = new Bishop(pieceToMove.getColor(), 'B');
+									break;
+								case 'Q':
+									pieceToMove = new Queen(pieceToMove.getColor(), 'Q');
+									break;
+								case 'K':
+									pieceToMove = new King(pieceToMove.getColor(), 'K');
+									break;
+					
+							}
+							if(pieceToMove.getColor() == 'w') {
+								pieceToMove.position.updatePosition((int) col, row+1);
+							} else {
+								pieceToMove.position.updatePosition((int) col, row-1);
+							}
+							board[(Math.abs(dstRow - 8))][dstCol] = pieceToMove.toString();
+							playerPieces.set(i, pieceToMove);
 						}
 					}
 					
