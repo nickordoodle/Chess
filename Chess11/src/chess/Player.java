@@ -86,7 +86,7 @@ public class Player implements PlayerAbilities {
 						/*
 						 * find destination piece
 						 */
-						if (row == dstRow && col == (char) dstCol) {
+						if (row2 == dstRow && col2 == (char) dstCol) {
 							opponent.playerPieces.remove(j);	
 							break;
 						}
@@ -98,7 +98,6 @@ public class Player implements PlayerAbilities {
 					System.out.println("Illegal move, try again");
 					Chess.isBadMove = true;
 				}
-				pieceToMove.isFirstMove--;
 			}
 			
 

@@ -9,7 +9,6 @@ public abstract class Piece {
 	protected char color;
 	private char type;
 	public Position position;
-	public int isFirstMove = 2;
 	
 	/**
 	 * Constructor for Piece

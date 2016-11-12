@@ -8,6 +8,7 @@ package pieces;
 public class Pawn extends Piece {
 
 	private boolean isPromoted;
+ 	private boolean isFirstMove;
 
 	/**
 	 * Constructor for Pawn
@@ -17,6 +18,7 @@ public class Pawn extends Piece {
 	 */
 	public Pawn(char color, char type) {
 		super(color, type);
+ 		isFirstMove = true;
 	}
 
 	public String toString(){
@@ -39,7 +41,7 @@ public class Pawn extends Piece {
 		char playerColor = piece.charAt(0);
 		
 		// Move 2 spaces on first turn
-		if (moveLength > 1 && isFirstMove > 0 && (srcCol == dstCol)) {
+		if (moveLength == 2 && isFirstMove && (srcCol == dstCol)) {
 			if(color == 'w') {
 				for (int i = srcRow - 1; i >= (srcRow - 2); i--) {
 					// check board spaces in between if they are empty
@@ -56,6 +58,7 @@ public class Pawn extends Piece {
 				}
 			}
 
+ 			isFirstMove = false;
 			return true;
 
 		} 
@@ -72,6 +75,7 @@ public class Pawn extends Piece {
 			if ((color == 'w' && dstRow > srcRow) || (color == 'b' && dstRow < srcRow) || (!board[rowToCheck][srcCol].trim().equals("") && !board[rowToCheck][srcCol].trim().equals("##"))) {
 				return false;
 			}
+ 			isFirstMove = false;
 			return true;
 		} 
 		// Diagonal move to take opponent piece
@@ -108,19 +112,28 @@ public class Pawn extends Piece {
 					}
 				}
 				System.out.println(enpassant);
-				
+
 				if (!board[dstRow][dstCol].contains(colorToCheck) && !enpassant) {
 					return false;
 				} else {
+					isFirstMove = false;
 					return true;
 				}
 			}
 
 
 		}
-		
+
 		return false;
 	}
+ 
+ 	public boolean isFirstMove() {
+ 		return isFirstMove;
+ 	}
+ 
+ 	public void setFirstMove(boolean isFirstMove) {
+ 		this.isFirstMove = isFirstMove;
+ 	}
 
 	public boolean isPromoted() {
 		return isPromoted;
