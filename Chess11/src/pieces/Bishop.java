@@ -55,14 +55,12 @@ public class Bishop extends Piece {
 			} else {
 				if (srcCol > dstCol) {
 					for(int i = 1; i < rowDist; i++) {
-						System.out.println(board[srcRow-i][srcCol-i]);
 						if (!board[srcRow-i][srcCol-i].trim().equals("") && !board[srcRow-i][srcCol-i].trim().equals("##")) {
 							return false;
 						}
 					}
 				} else {
 					for(int i = 1; i < rowDist; i++) {
-						System.out.println(board[srcRow-i][srcCol+i]);
 						if (!board[srcRow-i][srcCol+i].trim().equals("") && !board[srcRow-i][srcCol+i].trim().equals("##")) {
 							return false;
 						}

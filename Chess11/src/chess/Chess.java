@@ -39,6 +39,9 @@ public class Chess {
 		playerOne.setOpponent(playerTwo);
 		playerTwo.setOpponent(playerOne);
 		
+		boolean p1Check = false;
+		boolean p2Check = false;
+		
 		board = new Board(playerOne, playerTwo);
 		String[][] myBoard = board.getBoard();
 		
@@ -141,7 +144,7 @@ public class Chess {
 					}
 				}
 				
-				playerOne.detectCheck(myBoard, true);
+				p1Check = playerOne.detectCheck(myBoard, true);
 
 				count++; board.drawBoard();
 				System.out.println("Please enter your move " + playerTwoName + ".  You are black.");
@@ -190,7 +193,7 @@ public class Chess {
 					}
 				}
 				
-				playerOne.detectCheck(myBoard, false);
+				p2Check = playerOne.detectCheck(myBoard, false);
 
 				count++; board.drawBoard();
 				System.out.println("Please enter your move " + playerOneName + ".  You are white.");

@@ -35,7 +35,6 @@ public class King extends Piece {
 		srcCol = (int) (srcCol - 97);
 		dstRow = (int) (Math.abs(dstRow - 8));
 		dstCol = (int) (dstCol - 97);
-		System.out.println(colDist);
 		// 1 step movement
 		if((rowDist == 1 && colDist == 0) || (rowDist == 0 && colDist == 1) || (rowDist == 1 && colDist == 1) ) {
 			
@@ -81,15 +80,5 @@ public class King extends Piece {
 		return false;
 	}
 	
-	/*
-	 * Returns true if the opponents next move by any of its pieces
-	 * can take the king
-	 * 
-	 * Otherwise it is false, must be called each move
-	 */
-	private boolean isChecked(String[][] board){
-		
-		return true;
-	}
 
 }

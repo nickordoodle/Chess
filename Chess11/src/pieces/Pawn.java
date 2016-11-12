@@ -111,7 +111,6 @@ public class Pawn extends Piece {
 						board[dstRow+1][dstCol] = "";
 					}
 				}
-				System.out.println(enpassant);
 
 				if (!board[dstRow][dstCol].contains(colorToCheck) && !enpassant) {
 					return false;
