@@ -10,9 +10,10 @@ public class Rook extends Piece {
 	public String toString(){
 		return super.toString();
 	}
+	public boolean isValidMove(int srcRow, int srcCol, int dstRow, int dstCol, String[][] board) {
+		return false;
 	
-	public boolean isValidMove(String src, String dest, String[][] board) {
-		
+	/*	
 		// check the range between src and dest for no other pieces
 
 		// check for different numbers
@@ -75,7 +76,7 @@ public class Rook extends Piece {
 
 			return false;
 		}
-
+*/
 	}
 
 }

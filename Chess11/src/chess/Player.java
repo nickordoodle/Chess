@@ -40,35 +40,34 @@ public class Player implements PlayerAbilities {
 	 */
 
 	@Override
-	public String[][] movePiece(String src, String dest, String[][] board) {
-
+	public String[][] movePiece(int srcRow, int srcCol, int dstRow, int dstCol, String[][] board) {
 		Piece pieceToMove = null;
+		System.out.println((char) srcCol + ", " + srcRow);
 		for (int i = 0; i < playerPieces.size(); i++) {
-
-			char col = playerPieces.get(i).getPosition().getColumn();
-			int row = playerPieces.get(i).getPosition().getRow();
-
+			
+			char col = (char) playerPieces.get(i).getPosition().getRow();
+			int row = (int) playerPieces.get(i).getPosition().getColumn();
+			System.out.println(col + ", " + row);
 			/*
 			 * find piece to move in players pieces
 			 */
-			if (col == src.charAt(0)
-					&& row == Character.getNumericValue(src.charAt(1))) {
+			if (row == srcRow && col == (char) srcCol) {
 				pieceToMove = playerPieces.get(i);
 				LOGGER.info("Selected piece to Move: " + pieceToMove.toString());
 
 				/* Selected piece is okay to move, update board and piece */
-				if (pieceToMove.isValidMove(src, dest, board)) {
+				if (pieceToMove.isValidMove(srcRow, srcCol, dstRow, dstCol, board)) {
 
-					int srcRow = Math.abs(Character.getNumericValue(src.charAt(1)) - 8);
-					int srcCol = ((int) src.charAt(0)) - 97;
+					srcRow = (int) (Math.abs(srcRow - 8));
+					srcCol = (int) (srcCol - 97);
+					dstRow = (int) (Math.abs(dstRow - 8));
+					dstCol = (int) (dstCol - 97);
 					
-					int destRow = Math.abs(Character.getNumericValue(dest.charAt(1)) - 8);
-					int destCol = ((int) dest.charAt(0)) - 97;
-
-					board[destRow][destCol] = pieceToMove.toString();
+					board[dstRow][dstCol] = pieceToMove.toString();
 					board[srcRow][srcCol] = "";
 					LOGGER.info("Moved piece: " + pieceToMove.toString());
-					pieceToMove.getPosition().updatePosition(dest.charAt(0), Character.getNumericValue(dest.charAt(1)));
+					dstRow = (int) (Math.abs(dstRow - 8));
+					pieceToMove.getPosition().updatePosition(dstCol + 97, dstRow);
 
 				}
 				/* The player did not select a valid move */
@@ -76,6 +75,7 @@ public class Player implements PlayerAbilities {
 					System.out.println("Illegal move, try again");
 					Chess.isBadMove = true;
 				}
+				pieceToMove.isFirstMove--;
 			}
 			
 

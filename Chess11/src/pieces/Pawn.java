@@ -11,13 +11,11 @@ import java.util.logging.Logger;
  */
 public class Pawn extends Piece {
 
-	private boolean isFirstMove;
 	private boolean isPromoted;
 	private static final Logger LOGGER = Logger.getLogger(Pawn.class.getName());
 
 	public Pawn(char color, char type) {
 		super(color, type);
-		isFirstMove = true;
 	}
 
 	public String toString(){
@@ -35,62 +33,69 @@ public class Pawn extends Piece {
 	 * TODO: IMPLEMENT THIS Special case: en passant capture
 	 */
 
-	public boolean isValidMove(String src, String dest, String[][] board) {
+	public boolean isValidMove(int srcRow, int srcCol, int dstRow, int dstCol, String[][] board) {
 		
-		int moveLength = Math.abs(Character.getNumericValue(src.charAt(1)) 
-				- Character.getNumericValue(dest.charAt(1)));
+		int moveLength = dstRow - srcRow;
+		System.out.println("MOVELENGTH " + moveLength);
 
-		int col = ((int) src.charAt(0)) - 97;
-		int row = Math.abs(Character.getNumericValue(src.charAt(1)) - 8);
-
-		String piece = board[row][col];
+		srcRow = (int) (Math.abs(srcRow - 8));
+		srcCol = (int) (srcCol - 97);
+		dstRow = (int) (Math.abs(dstRow - 8));
+		dstCol = (int) (dstCol - 97);
+		
+		String piece = board[srcRow][srcCol];
 		char playerColor = piece.charAt(0);
 		
 		// Move 2 spaces on first turn
-		if (moveLength > 1 && isFirstMove && (src.charAt(0) == dest.charAt(0))) {
-			
-			for (int i = row; i < (row + 2); i++) {
-				// check board spaces in between if they are empty
-				if (!board[col][row].isEmpty() && !board[col][row].contains("##")) {
-					return false;
+		if (moveLength > 1 && isFirstMove > 0 && (srcCol == dstCol)) {
+			if(color == 'w') {
+				for (int i = srcRow - 1; i >= (srcRow - 2); i--) {
+					// check board spaces in between if they are empty
+					System.out.println(board[i][srcCol]);
+					if (!board[i][srcCol].trim().equals("") && !board[i][srcCol].trim().equals("##")) {
+						return false;
+					}
+				}
+			} else {
+				for (int i = srcRow + 1; i >= (srcRow + 2); i++) {
+					// check board spaces in between if they are empty
+					System.out.println(board[i][srcCol]);
+					if (!board[i][srcCol].trim().equals("") && !board[i][srcCol].trim().equals("##")) {
+						return false;
+					}
 				}
 			}
 
-			isFirstMove = false;
 			return true;
 
 		} 
 		// Normal one space forward move
-		else if (moveLength == 1 && src.charAt(0) == dest.charAt(0)) {
+		else if (moveLength == 1 && srcCol == dstCol) {
+System.out.println("ONE FORWARD");
+			int rowToCheck;
 
-			int columnToCheck;
-
-			if (row > Character.getNumericValue(dest.charAt(1))) {
-				columnToCheck = col--;
+			if (color == 'w') {
+				rowToCheck = srcCol - 1;
 			} else {
-				columnToCheck = col++;
+				rowToCheck = srcCol + 1;
 			}
 			// check space ahead if empty
-			if (!board[columnToCheck][row].isEmpty() && !board[col][row].contains("##")) {
+			System.out.println(board[rowToCheck][srcCol]);
+			if (!board[rowToCheck][srcCol].trim().equals("") && !board[rowToCheck][srcCol].trim().equals("##")) {
 				return false;
 			}
 			
-			isFirstMove = false;
 			return true;
 		}
 		// Diagonal move to take opponent piece
-		else if (moveLength == 1 && src.charAt(0) != dest.charAt(0)) {
+		else if (moveLength == 1 && srcCol != dstCol) {
 			
-			int colDiff = Math.abs(Character.getNumericValue(src.charAt(0)) 
-					- Character.getNumericValue(dest.charAt(0)));
+			int colDiff = Math.abs(srcCol - dstCol);
 
 			// Check if destination is diagonal
 			if (colDiff != 1) {
 				return false;
 			} else {
-				
-				int columnToCheck = Character.getNumericValue(dest.charAt(0));
-				int rowToCheck = Character.getNumericValue(dest.charAt(1));
 				
 				CharSequence colorToCheck;
 				if(playerColor == 'b'){
@@ -99,7 +104,7 @@ public class Pawn extends Piece {
 					colorToCheck = "b";
 				}
 				
-				if (!board[columnToCheck][rowToCheck].contains(colorToCheck)) {
+				if (!board[dstRow][dstCol].contains(colorToCheck)) {
 					return false;
 				} else {
 					return true;
@@ -110,14 +115,6 @@ public class Pawn extends Piece {
 		}
 		
 		return true;
-	}
-
-	public boolean isFirstMove() {
-		return isFirstMove;
-	}
-
-	public void setFirstMove(boolean isFirstMove) {
-		this.isFirstMove = isFirstMove;
 	}
 
 	public boolean isPromoted() {

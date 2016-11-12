@@ -11,7 +11,7 @@ package chess;
 public interface PlayerAbilities {
 	
 	
-	String[][] movePiece(String src, String dest, String[][] board);
+	String[][] movePiece(int srcRow, int srcCol, int dstRow, int dstCol, String[][] board);
 	String toString();
 	
 

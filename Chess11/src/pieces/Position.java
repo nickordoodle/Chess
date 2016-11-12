@@ -11,7 +11,7 @@ public class Position {
 	}
 	
 	
-	public void updatePosition(char col, int row){
+	public void updatePosition(int row, int col){
 		setColumn(col);
 		setRow(row);
 	}
@@ -20,8 +20,8 @@ public class Position {
 		return column;
 	}
 
-	public void setColumn(char column) {
-		this.column = column;
+	public void setColumn(int column) {
+		this.column = (char) column;
 	}
 
 	public int getRow() {

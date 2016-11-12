@@ -72,7 +72,7 @@ public class Board {
 				
 			for (int a = 0; a < newBoard.length; a++){
 				
-				boolean isPlayerOne = true;
+				boolean isPlayerOne = false;
 
 				//sets the column values designated by letters
 				if(a == 8 ){
@@ -94,7 +94,7 @@ public class Board {
 					}
 					else {
 						color = 'w';
-						isPlayerOne = false;
+						isPlayerOne = true;
 					}
 					
 					switch(initialRowSet[a]){	
@@ -141,7 +141,7 @@ public class Board {
 						color = 'b';
 					} else {
 						color = 'w';
-						isPlayerOne = false;
+						isPlayerOne = true;
 					}
 					
 					Piece newPiece = new Pawn(color, 'p');
@@ -194,6 +194,10 @@ public class Board {
 	
 	public String[][] getBoard() {
 		return board;
+	}
+	
+	public String getPiece(int firstIndex, int secondIndex) {
+		return board[firstIndex][secondIndex];
 	}
 
 	public void setBoard(String[][] board) {

@@ -49,13 +49,12 @@ public class Chess {
 		 * resign from a player
 		 */
 		
-		System.out.println("Let the chess game begin!\n" + playerOne.name + " will "
+		System.out.println("Let the chess game begin!\n" + playerOne.name + " is white and will "
 				+ "go first.\n");
 		
 		// Initial Turn 
 		board.drawBoard();
-		System.out.print("Turn "+count+": \n" + (count % 2 == 0 ? playerOne.name : playerTwo.name) 
-				+ "'s  move: ");
+		System.out.println("Please enter your move " + playerOneName + ".  You are white.");
 		moveString = input.nextLine();
 		
 		while(input.hasNextLine() && !gameOver){
@@ -94,35 +93,41 @@ public class Chess {
 			// Prepare Next Turn
 			
 			if(!gameOver) {
-				//Draw board 
-				board.drawBoard();
+				//Draw board
 			}
 
 			if (count % 2 == 0) {
-				System.out.println("Please enter your move player two.  You are white pieces.["
-						+ playerTwo.name + "]");
 
-				LOGGER.info("Validating input...  " + moveList[0].charAt(0) + " " + moveList[1].charAt(0) + " "
-						+ moveList[0].charAt(1) + " " + moveList[1].charAt(1));
-
-				if (!validateInput(moveList[0].charAt(0), moveList[1].charAt(0),
+				if (moveList.length < 2 || moveList[0].length() < 2 || moveList[1].length() < 2 || !validateInput(moveList[0].charAt(0), moveList[1].charAt(0),
 						Character.getNumericValue(moveList[0].charAt(1)),
 						Character.getNumericValue(moveList[1].charAt(1)))) {
-					System.out.println("Please enter valid input: [a-h][1-8] [a-h][1-8]\n");
+					System.out.println("Please enter valid input: [a-h][1-8] [a-h][1-8]");
 					continue;
 				}
 
-				int firstIndex = (int) (moveList[0].charAt(0)) - 97;
-				int secondIndex = (int) (Math.abs((Character.getNumericValue(moveList[0].charAt(1))) - 8));
+				int selectedRow = (int) (Math.abs((Character.getNumericValue(moveList[0].charAt(1))) - 8));
+				int selectedCol = (int) (moveList[0].charAt(0)) - 97;
 
+				int srcRow = (int) Character.getNumericValue(moveList[0].charAt(1));
+				int srcCol = (int) moveList[0].charAt(0);
+
+				int dstRow = (int) Character.getNumericValue(moveList[1].charAt(1));
+				int dstCol = (int) moveList[1].charAt(0);
+				
+				String selectedPiece = board.getPiece(selectedRow, selectedCol);
+				System.out.println(selectedPiece);
 				// check if user chose correct colored piece
-				String selectedPiece = myBoard[firstIndex][secondIndex];
-				if (!selectedPiece.isEmpty() && selectedPiece.charAt(0) != 'w') {
-					System.out.println("Please select your own pieces.\n");
+				if (selectedPiece.trim().equals("") || selectedPiece.trim().equals("##")) {
+					System.out.println("No piece at that position! Please select a piece:");
+					continue;
+				}
+				
+				if (selectedPiece.charAt(0) != 'w') {
+					System.out.println("You are white! Please select your own pieces:");
 					continue;
 				}
 
-				String[][] copy = playerTwo.movePiece(moveList[0], moveList[1], myBoard);
+				String[][] copy = playerOne.movePiece(srcRow, srcCol, dstRow, dstCol, myBoard);
 				for (int i = 0; i < copy.length; i++) {
 					for (int a = 0; a < copy[i].length; a++) {
 						myBoard[i][a] = copy[i][a];
@@ -134,13 +139,42 @@ public class Chess {
 				}
 
 				isBadMove = false;
+				count++; board.drawBoard();
+				System.out.println("Please enter your move " + playerTwoName + ".  You are black.");
 
-			} else{
+			} else {
 
-				System.out.println("Please enter your move player one.  You are black pieces["
-						+ playerOne.name + "]");
+				if (moveList.length < 2 || moveList[0].length() < 2 || moveList[1].length() < 2 || !validateInput(moveList[0].charAt(0), moveList[1].charAt(0),
+						Character.getNumericValue(moveList[0].charAt(1)),
+						Character.getNumericValue(moveList[1].charAt(1)))) {
+					System.out.println("Please enter valid input: [a-h][1-8] [a-h][1-8]");
+					continue;
+				}
 
-				String[][] copy = playerOne.movePiece(moveList[0], moveList[1], myBoard);
+				int selectedRow = (int) (Math.abs((Character.getNumericValue(moveList[0].charAt(1))) - 8));
+				int selectedCol = (int) (moveList[0].charAt(0)) - 97;
+
+				int srcRow = (int) Character.getNumericValue(moveList[0].charAt(1));
+				int srcCol = (int) moveList[0].charAt(0);
+
+				int dstRow = (int) Character.getNumericValue(moveList[1].charAt(1));
+				int dstCol = (int) moveList[1].charAt(0);
+				
+				String selectedPiece = board.getPiece(selectedRow, selectedCol);
+				System.out.println(selectedPiece);
+				
+				// check if user chose correct colored piece
+				if (selectedPiece.trim().equals("") || selectedPiece.trim().equals("##")) {
+					System.out.println("No piece at that position! Please select a piece:");
+					continue;
+				}
+				
+				if (selectedPiece.charAt(0) != 'b') {
+					System.out.println("You are black! Please select your own pieces:");
+					continue;
+				}
+
+				String[][] copy = playerTwo.movePiece(srcRow, srcCol, dstRow, dstCol, myBoard);
 				for (int i = 0; i < copy.length; i++) {
 					for (int a = 0; a < copy[i].length; a++) {
 						myBoard[i][a] = copy[i][a];
@@ -152,17 +186,11 @@ public class Chess {
 				}
 
 				isBadMove = false;
+				count++; board.drawBoard();
+				System.out.println("Please enter your move " + playerOneName + ".  You are white.");
 
 			}
-				
-				/*Then pick move according to player turn, use odd/even numbers
-				* to indicate which player's turn it is.
-				*/
-				count++;	
-				
-				// Ask for move
-				System.out.print("\n" + (count % 2 == 0 ? playerOne.name : playerTwo.name) 
-						+ "'s  move: ");
+			
 		}
 			
 			
@@ -175,7 +203,7 @@ public class Chess {
 		try {
 
 			// This block configure the logger with handler and formatter
-			fh = new FileHandler("C:/Users/Nick/workspace/chesslog.log");
+			fh = new FileHandler("C:/Users/Kartik/workspace/chesslog.log");
 			LOGGER.addHandler(fh);
 			SimpleFormatter formatter = new SimpleFormatter();
 			fh.setFormatter(formatter);
@@ -207,11 +235,13 @@ public class Chess {
 		if (((int) firstChar) >= 97 && ((int) firstChar) <= 104 && ((int) secondChar) >= 97
 				&& ((int) secondChar) <= 104) {
 			if (firstDigit >= 1 && firstDigit <= 8 && secondDigit >= 1 && secondDigit <= 8) {
-				if (firstDigit == secondDigit && firstChar != secondChar) {
+				return true;
+				
+				/* if (firstDigit == secondDigit && firstChar != secondChar) {
 					return true;
 				} else if (firstChar == secondChar && firstDigit != secondDigit) {
 					return true;
-				}
+				} */
 			}
 		}
 

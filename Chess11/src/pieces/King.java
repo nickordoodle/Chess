@@ -11,7 +11,7 @@ public class King extends Piece {
 		return super.toString();
 	}
 	
-	public boolean isValidMove(String src, String dest, String[][] board) {
+	public boolean isValidMove(int srcRow, int srcCol, int dstRow, int dstCol, String[][] board) {
 		
 		return true;
 	}

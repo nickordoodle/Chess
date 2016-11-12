@@ -2,9 +2,10 @@ package pieces;
 
 public abstract class Piece {
 	
-	private char color;
+	protected char color;
 	private char type;
 	public Position position;
+	public int isFirstMove = 2;
 	
 	public Piece(char color, char type){
 		this.color = color;
@@ -17,7 +18,7 @@ public abstract class Piece {
 	}
 	
 	// Implemented for each piece
-	public abstract boolean isValidMove(String src, String dest, String[][] board);
+	public abstract boolean isValidMove(int srcRow, int srcCol, int dstRow, int dstCol, String[][] board);
 
 
 	public char getColor() {
