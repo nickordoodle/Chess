@@ -92,19 +92,22 @@ public class Pawn extends Piece {
 				}
 				
 				boolean enpassant = false;
-
-				if(color == 'w' && board[dstRow-1][dstCol].equals("bP")) {
-					if((dstRow - 1 + (dstCol-1)) % 2 == 0) {
-						board[dstRow-1][dstCol] = "## ";
-					}
-					enpassant = true;
-				}
-				if(color == 'b' && board[dstRow+1][dstCol].equals("wP")) {
+				if(color == 'w' && board[dstRow+1][dstCol].trim().equals("bp")) {
 					if((dstRow + 1 + (dstCol-1)) % 2 == 0) {
 						board[dstRow+1][dstCol] = "## ";
+					} else {
+						board[dstRow+1][dstCol] = "";
 					}
 					enpassant = true;
 				}
+				if(color == 'b' && board[dstRow-1][dstCol].equals("wp")) {
+					if((dstRow - 1 + (dstCol-1)) % 2 == 0) {
+						board[dstRow-1][dstCol] = "## ";
+					} else {
+						board[dstRow+1][dstCol] = "";
+					}
+				}
+				System.out.println(enpassant);
 				
 				if (!board[dstRow][dstCol].contains(colorToCheck) && !enpassant) {
 					return false;

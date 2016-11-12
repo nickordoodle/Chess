@@ -66,7 +66,6 @@ public class Player implements PlayerAbilities {
 					board[dstRow][dstCol] = pieceToMove.toString();
 					board[srcRow][srcCol] = "";
 					dstRow = (int) (Math.abs(dstRow - 8));
-					System.out.println(srcRow + ", " + srcCol);
 					if((srcRow + (srcCol-1)) % 2 == 0) {
 						board[srcRow][srcCol] = "## ";
 					}
