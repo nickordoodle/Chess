@@ -89,7 +89,7 @@ public class Player implements PlayerAbilities {
 						if (pieceToMove.getType() == 'K' && pieceToMove.getColor() == 'b' && row2 == 8 && col2 == (char) 104) {
 							Piece piece = playerPieces.get(j);
 							board[0][5] = piece.toString();
-							board[0][7] = "";
+							board[0][7] = "## ";
 							piece.getPosition().updatePosition(0, 102);
 						}
 					}
