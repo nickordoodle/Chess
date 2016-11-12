@@ -6,7 +6,9 @@ import view.Board;
 
 /**
  * @author Nick and Kartik
- *
+ * 
+ * Main Class for the Chess Game
+ * 
  */
 public class Chess {
 

@@ -3,6 +3,8 @@ package pieces;
 /**
  * @author Nick and Kartik
  *
+ * King Piece for Chess Game
+ * 
  */
 public class King extends Piece {
 

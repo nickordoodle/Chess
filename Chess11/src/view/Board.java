@@ -14,6 +14,8 @@ import pieces.Rook;
 /**
  * @author Nick and Kartik
  *
+ * Board Object for Chess Game
+ * 
  */
 public class Board {
 

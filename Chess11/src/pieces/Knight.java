@@ -5,6 +5,8 @@ package pieces;
 /**
  * @author Nick and Kartik
  *
+ * Knight Piece for Chess Game
+ * 
  */
 public class Knight extends Piece {
 

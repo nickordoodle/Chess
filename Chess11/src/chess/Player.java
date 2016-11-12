@@ -15,6 +15,8 @@ import pieces.Rook;
 /**
  * @author Nick and Kartik
  *
+ * Player Object for Chess Game
+ *
  */
 public class Player implements PlayerAbilities {
 

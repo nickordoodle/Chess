@@ -3,6 +3,8 @@ package pieces;
 /**
  * @author Nick and Kartik
  *
+ * Position Object for Pieces
+ * 
  */
 public class Position {
 	

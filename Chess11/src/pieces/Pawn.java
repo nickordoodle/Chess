@@ -4,6 +4,8 @@ package pieces;
 /**
  * @author Nick and Kartik
  *
+ * Pawn Piece for Chess Game
+ * 
  */
 public class Pawn extends Piece {
 

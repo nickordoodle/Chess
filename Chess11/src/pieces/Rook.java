@@ -3,6 +3,8 @@ package pieces;
 /**
  * @author Nick and Kartik
  *
+ * Rook Piece for Chess Game
+ * 
  */
 public class Rook extends Piece {
 

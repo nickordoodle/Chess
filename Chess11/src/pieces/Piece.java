@@ -3,6 +3,8 @@ package pieces;
 /**
  * @author Nick and Kartik
  *
+ * Piece Object for Chess Game
+ * 
  */
 public abstract class Piece {
 	

@@ -4,6 +4,8 @@ package pieces;
 /**
  * @author Nick and Kartik
  *
+ * Bishop Piece for Chess Game
+ *
  */
 public class Bishop extends Piece {
 	
@@ -39,13 +41,13 @@ public class Bishop extends Piece {
 			CharSequence colorToCheck;
 			if(color == 'b'){
 				if (srcCol > dstCol) {
-					for(int i = 1; i < rowDist; i++) {
+					for(int i = 1; i < rowDist-1; i++) {
 						if (!board[srcRow+i][srcCol-i].trim().equals("") && !board[srcRow+i][srcCol-i].trim().equals("##")) {
 							return false;
 						}
 					}
 				} else {
-					for(int i = 1; i < rowDist; i++) {
+					for(int i = 1; i < rowDist-1; i++) {
 						if (!board[srcRow+i][srcCol+i].trim().equals("") && !board[srcRow+i][srcCol+i].trim().equals("##")) {
 							return false;
 						}
@@ -54,7 +56,7 @@ public class Bishop extends Piece {
 				colorToCheck = "w";
 			} else {
 				if (srcCol > dstCol) {
-					for(int i = 1; i < rowDist; i++) {
+					for(int i = 1; i < rowDist-1; i++) {
 						if (!board[srcRow-i][srcCol-i].trim().equals("") && !board[srcRow-i][srcCol-i].trim().equals("##")) {
 							return false;
 						}
