@@ -51,7 +51,6 @@ public class Player implements PlayerAbilities {
 			 */
 			if (row == srcRow && col == (char) srcCol) {
 				pieceToMove = playerPieces.get(i);
-				LOGGER.info("Selected piece to Move: " + pieceToMove.toString());
 
 				/* Selected piece is okay to move, update board and piece */
 				if (pieceToMove.isValidMove(srcRow, srcCol, dstRow, dstCol, board)) {
@@ -63,14 +62,13 @@ public class Player implements PlayerAbilities {
 					
 					board[dstRow][dstCol] = pieceToMove.toString();
 					board[srcRow][srcCol] = "";
-					LOGGER.info("Moved piece: " + pieceToMove.toString());
 					dstRow = (int) (Math.abs(dstRow - 8));
 					pieceToMove.getPosition().updatePosition(dstCol + 97, dstRow);
 
 				}
 				/* The player did not select a valid move */
 				else {
-					System.out.println("Illegal move, try again");
+					System.out.println("Illegal move, please enter a valid move: ");
 					Chess.isBadMove = true;
 				}
 				pieceToMove.isFirstMove--;

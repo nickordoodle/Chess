@@ -76,7 +76,7 @@ public class Pawn extends Piece {
 				rowToCheck = srcRow + 1;
 			}
 			// check space ahead if empty
-			if (!board[rowToCheck][srcCol].trim().equals("") && !board[rowToCheck][srcCol].trim().equals("##")) {
+			if ((color == 'w' && dstRow > srcRow) || (color == 'b' && dstRow < srcRow) || (!board[rowToCheck][srcCol].trim().equals("") && !board[rowToCheck][srcCol].trim().equals("##"))) {
 				return false;
 			}
 			

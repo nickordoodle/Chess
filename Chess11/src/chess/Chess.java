@@ -115,7 +115,7 @@ public class Chess {
 				int dstCol = (int) moveList[1].charAt(0);
 				
 				String selectedPiece = board.getPiece(selectedRow, selectedCol);
-				System.out.println(selectedPiece);
+
 				// check if user chose correct colored piece
 				if (selectedPiece.trim().equals("") || selectedPiece.trim().equals("##")) {
 					System.out.println("No piece at that position! Please select a piece:");
@@ -130,6 +130,7 @@ public class Chess {
 				String[][] copy = playerOne.movePiece(srcRow, srcCol, dstRow, dstCol, myBoard);
 
 				if (isBadMove) {
+					isBadMove = false;
 					continue;
 				}
 				
@@ -139,7 +140,6 @@ public class Chess {
 					}
 				}
 
-				isBadMove = false;
 				count++; board.drawBoard();
 				System.out.println("Please enter your move " + playerTwoName + ".  You are black.");
 
@@ -162,7 +162,6 @@ public class Chess {
 				int dstCol = (int) moveList[1].charAt(0);
 				
 				String selectedPiece = board.getPiece(selectedRow, selectedCol);
-				System.out.println(selectedPiece);
 				
 				// check if user chose correct colored piece
 				if (selectedPiece.trim().equals("") || selectedPiece.trim().equals("##")) {
@@ -176,17 +175,18 @@ public class Chess {
 				}
 
 				String[][] copy = playerTwo.movePiece(srcRow, srcCol, dstRow, dstCol, myBoard);
+
+				if (isBadMove) {
+					isBadMove = false;
+					continue;
+				}
+				
 				for (int i = 0; i < copy.length; i++) {
 					for (int a = 0; a < copy[i].length; a++) {
 						myBoard[i][a] = copy[i][a];
 					}
 				}
 
-				while (isBadMove) {
-					continue;
-				}
-
-				isBadMove = false;
 				count++; board.drawBoard();
 				System.out.println("Please enter your move " + playerOneName + ".  You are white.");
 

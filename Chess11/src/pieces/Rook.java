@@ -16,15 +16,24 @@ public class Rook extends Piece {
 		srcCol = (int) (srcCol - 97);
 		dstRow = (int) (Math.abs(dstRow - 8));
 		dstCol = (int) (dstCol - 97);
-
 		// check for different numbers
 		if (srcRow == dstRow) {
-
-			for(int i = srcCol; i < dstCol; i++) {
-
-				// check if other pieces are in the way
-				if (!board[srcRow][i].trim().equals("") && !board[i][srcCol].trim().equals("##")) {
-					return false;
+			
+			if(srcCol > dstCol) {
+				for(int i = srcCol-1; i > dstCol-1; i--) {
+	
+					// check if other pieces are in the way
+					if (!board[srcRow][i].trim().equals("") && !board[srcRow][i].trim().equals("##")) {
+						return false;
+					}
+				}
+			} else {
+				for(int i = srcCol+1; i < dstCol-1; i++) {
+	
+					// check if other pieces are in the way
+					if (!board[srcRow][i].trim().equals("") && !board[srcRow][i].trim().equals("##")) {
+						return false;
+					}
 				}
 			}
 			
@@ -35,19 +44,29 @@ public class Rook extends Piece {
 				colorToCheck = "b";
 			}
 			
-			if (!board[dstRow][dstCol].contains(colorToCheck)) {
+			if (!board[dstRow][dstCol].contains(colorToCheck) && !board[dstRow][dstCol].trim().equals("") && !board[dstRow][dstCol].trim().equals("##")) {
 				return false;
 			} else {
 				return true;
 			}
 
 		} else if (srcCol == dstCol) {
-
-			for(int i = srcRow; i < dstRow; i++) {
-
-				// check if other pieces are in the way
-				if (!board[i][srcCol].trim().equals("") && !board[srcRow][i].trim().equals("##")) {
-					return false;
+			
+			if(color == 'w') {
+				for(int i = srcRow-1; i > dstRow-1; i--) {
+	
+					// check if other pieces are in the way
+					if (!board[i][srcCol].trim().equals("") && !board[i][srcCol].trim().equals("##")) {
+						return false;
+					}
+				}
+			} else {
+				for(int i = srcRow+1; i < dstRow+1; i++) {
+	
+					// check if other pieces are in the way
+					if (!board[i][srcCol].trim().equals("") && !board[i][srcCol].trim().equals("##")) {
+						return false;
+					}
 				}
 			}
 			
@@ -58,11 +77,12 @@ public class Rook extends Piece {
 				colorToCheck = "b";
 			}
 			
-			if (!board[dstRow][dstCol].contains(colorToCheck)) {
+			if (!board[dstRow][dstCol].contains(colorToCheck) && !board[dstRow][dstCol].trim().equals("") && !board[dstRow][dstCol].trim().equals("##")) {
 				return false;
 			} else {
 				return true;
 			}
+			
 
 		} else {
 

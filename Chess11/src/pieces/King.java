@@ -23,6 +23,10 @@ public class King extends Piece {
 		// 1 step movement
 		if(moveLength == 1) {
 			
+			if (board[dstRow][dstCol].trim().equals("") || board[dstRow][dstCol].trim().equals("##")) {
+				return true;
+			}
+			
 			CharSequence colorToCheck;
 			if(color == 'b'){
 				colorToCheck = "w";
@@ -32,13 +36,10 @@ public class King extends Piece {
 			
 			if (!board[dstRow][dstCol].contains(colorToCheck)) {
 				return false;
+			} else {
+				return true;
 			}
 			
-			if (!board[dstRow][dstCol].trim().equals("") && !board[dstRow][dstCol].trim().equals("##")) {
-				return false;
-			}
-			
-			return true;
 		}
 		// castling movement
 		else if(moveLength == 2) {
