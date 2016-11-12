@@ -35,6 +35,9 @@ public class Chess {
 		
 		Player playerOne = new Player(playerOneName, 'b');
 		Player playerTwo = new Player(playerTwoName, 'w');
+
+		playerOne.setOpponent(playerTwo);
+		playerTwo.setOpponent(playerOne);
 		
 		board = new Board(playerOne, playerTwo);
 		String[][] myBoard = board.getBoard();

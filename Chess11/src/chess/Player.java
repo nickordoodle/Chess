@@ -16,6 +16,7 @@ public class Player implements PlayerAbilities {
 	String name;
 	char color;
 	ArrayList<Piece> playerPieces;
+	Player opponent = null;
 	
 	/**
 	 * Constructor for Player
@@ -76,6 +77,18 @@ public class Player implements PlayerAbilities {
 						}
 						if(pieceToMove.getPosition().getRow() == 7 && pieceToMove.getColor() == 'b') {
 							pieceToMove.setType(extra.charAt(0));
+						}
+					}
+					for (int j = 0; j < opponent.playerPieces.size(); j++) {
+						
+						char col2 = (char) opponent.playerPieces.get(j).getPosition().getRow();
+						int row2 = (int) opponent.playerPieces.get(j).getPosition().getColumn();
+						/*
+						 * find destination piece
+						 */
+						if (row == dstRow && col == (char) dstCol) {
+							opponent.playerPieces.remove(j);	
+							break;
 						}
 					}
 
@@ -146,6 +159,10 @@ public class Player implements PlayerAbilities {
 	 */
 	public void setPlayerPieces(ArrayList<Piece> playerPieces) {
 		this.playerPieces = playerPieces;
+	}
+	
+	public void setOpponent(Player opponent) {
+		this.opponent = opponent;
 	}
 
 }
