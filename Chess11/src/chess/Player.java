@@ -185,46 +185,41 @@ public class Player implements PlayerAbilities {
 			}
 		}
 		
-		for(Piece piece : playerPieces) {
-			if(piece.isValidMove(piece.getPosition().getColumn(), piece.getPosition().getRow(), Math.abs(kingRow-8), kingCol + 97, board)) {
-				Piece king = null;
-				for (int i = 0;i < opponent.getPlayerPieces().size(); i++) {
-					
-					char col = (char) opponent.getPlayerPieces().get(i).getPosition().getRow();
-					int row = (int) opponent.getPlayerPieces().get(i).getPosition().getColumn();
-					
-					if (row == Math.abs(kingRow-8) && col == (char) (kingCol + 97) ) {
-						king = opponent.getPlayerPieces().get(i);
-						break;
-					}
-				}
-				boolean checkMate = true;
-				for(int i=-1; i <= 1; i++) {
-					for(int j=-1; j <= 1; j++) {
-						if(i != 0 && j != 0) {
-							int newRow = kingRow + i;
-							int newCol = kingCol + j;
-							
-							if(Math.abs(newRow-8) > 0 && Math.abs(newRow-8) < 9 && newCol >= 0 && newCol < 8) {
-								if(piece.isValidMove(king.getPosition().getColumn(), king.getPosition().getRow(), Math.abs(newRow-8), newCol + 97, board)) {
-									checkMate = false;
-								}
-							}
-						}
-					}	
-				}
-				
-				
-				if(checkMate) {
-					System.out.println("Checkmate");
-				} else {
-					System.out.println("Check");
-				}
-				return checkMate;
+		Piece king = null;
+		for (int i = 0; i < opponent.getPlayerPieces().size(); i++) {
+			char col = (char) opponent.getPlayerPieces().get(i).getPosition().getRow();
+			int row = (int) opponent.getPlayerPieces().get(i).getPosition().getColumn();
+			if (row == Math.abs(kingRow-8) && col == (char) (kingCol + 97)) {
+				king = opponent.getPlayerPieces().get(i);
+				break;
 			}
 		}
-		
-		return false;
+		boolean checkMate = true;
+		boolean check = false;
+		for(int i = -1; i <= 1; i++){
+			for(int j = -1; j <= 1; j++){
+				int newRow = kingRow + i;
+				int newCol = kingCol + j;
+				if((i == 0 && j == 0)
+				|| Math.abs(newRow-8) > 0 && Math.abs(newRow-8) < 9 && newCol >= 0 && newCol < 8 &&
+				king.isValidMove(king.getPosition().getColumn(), king.getPosition().getRow(), Math.abs(newRow - 8), newCol + 97, board)){
+					boolean canMoveHere = true;
+					for(Piece piece : playerPieces){
+						if(piece.isValidMove(piece.getPosition().getColumn(), piece.getPosition().getRow(), Math.abs(newRow - 8), newCol + 97, board)){
+							canMoveHere = false;
+							check = true;
+						}
+					}
+					if(canMoveHere) checkMate = false;
+				}
+			}
+		}
+		if(checkMate) {
+			System.out.println("Checkmate");
+		} else if(check) {
+			System.out.println("Check");
+		}
+		return checkMate;
 	}
 
 
